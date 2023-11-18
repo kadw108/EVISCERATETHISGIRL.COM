@@ -1,5 +1,3 @@
-![Murdercore title screen.](https://github.com/kadw108/EVISCERATETHISGIRL.COM/blob/main/cover2.gif)
-
 ## [Play Here](https://kanderwund.itch.io/evisceratethisgirl)
 
 Contains source code and assets for the horror game EVISCERATETHISGIRL.COM, originally made for [2023's Neo Twiny Jam](https://itch.io/jam/neo-twiny-jam/entries).
