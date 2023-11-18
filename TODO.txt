@@ -1,7 +1,0 @@
-- Fix AGAIN? on last screen so it only shows up after button clicked
-- Fix audio? some youtubers have it playing weirdly
-	- Add audio preload
-- Make it so only one button activates the alternate 'close this site' ending
-- Add dialogue for not hurting her
-- Improve sin detection dialogue (trigger on any mention of 'nothing'?)
-- Limit number of decos that can spawn/interval between deco spawns to prevent autoclickers from 'exploding' the game
