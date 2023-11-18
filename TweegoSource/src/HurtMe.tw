@@ -1,0 +1,88 @@
+:: Hurt Me {"position":"900,625","size":"100,100"}
+\<<nobr>>
+<div id="screen">
+<div id="screenBg"/>
+<div id="edge" style="
+	background-image: url(assets/edge_black.gif),
+    	url(assets/black_screen.png);
+">
+<div id="screenContents">
+
+<<include "IncludeHeaderElements">>
+
+<p id="dialogueText" class="girlA dialogue" style="
+	top: 150px;
+    color: #ff0070;
+    font-size: 25px;
+    text-align: center;
+">
+</p>
+
+<<if $helloVisited < 9>>
+<a id="transition" data-passage="Eviscerate" class="hidden">
+<p class="dialogue" style="
+	font-family: 'Public Pixel', monospace;
+    color: #ff0099;
+    font-size: 28px;
+    text-align: center;
+    top: 200px;
+    z-index: 25;
+">
+YES
+</p></a>
+<<else>>
+<a id="transition" data-passage="EviscerateFinal" class="hidden">
+<p class="dialogue" style="
+	font-family: 'Public Pixel', monospace;
+    color: #ff0099;
+    font-size: 28px;
+    text-align: center;
+    top: 200px;
+    z-index: 25;
+">
+YES
+</p></a>
+<</if>>
+
+</div></div></div>
+
+<div id="narrative" class="hidden">
+
+...
+
+</div>
+
+<<done>>
+<<script>>
+
+let dialogueTextElement = document.getElementById("dialogueText");
+let typewriter2 = new Typewriter(dialogueTextElement, {
+    loop: false,
+    delay: 95,
+    cursor: "",
+});
+
+/* Last element of current dialogue array */
+const displayText =
+    setup.dialogueArrayList[State.variables.whichDialogue]
+    .slice(-1)[0];
+
+typewriter2
+    .typeString(displayText)
+    .pauseFor(1000)
+    .callFunction(
+        (elements) => {
+            const transition = document.getElementById("transition");
+            if (transition !== null) {
+                transition.classList.remove("hidden");
+            }
+        }
+    )
+    .start();
+
+<</script>>
+<</done>>
+
+<<include "ScreenScript">>
+
+<</nobr>>\

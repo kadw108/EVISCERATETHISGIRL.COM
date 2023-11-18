@@ -1,0 +1,60 @@
+PNG to gif:
+
+convert $(for ((a=1; a<136; a++)); do printf -- "-delay 10 %s.png " $a; done;) result.gif
+
+convert $(for ((a=1; a<11; a++)); do printf -- "-delay 8 -dispose Background %s.png " $a; done;) result.gif
+
+use -dispose Background so the frames of a transparent gif don't overlap each other
+
+Where start/end values for a are numbers of first/last frames.
+
+And see https://unix.stackexchange.com/questions/24014/creating-a-gif-animation-from-png-files
+
+---
+
+Change speed:
+
+convert -delay 50 animation1.gif animation2.gif
+
+convert -delay 8 result.gif result2.gif
+
+This will set a FPS (frame per second) to 100/50=2. You can change the 50 to some other desired value.
+
+
+Flip gif horizontally:
+
+convert -flop result2.gif result3.gif
+
+---
+
+Compress results:
+
+https://superuser.com/questions/1107200/optimize-animated-gif-size-in-command-line
+
+gifsicle -O3 --colors 256 --lossy=30 -o output.gif input.gif
+gifsicle -O3 --colors 16 --lossy=30 -o output.gif result.gif
+
+* --colors 256 is color space, number of colors in gif -- can go as low as 16 for really small, maybe 8?
+* --lossy=30 can go to lossy=200, 30 is "good enough"
+
+---
+
+Set non-looping:
+https://unix.stackexchange.com/questions/317537/how-to-open-a-gif-without-loop-repetition-with-oeg
+
+convert inputfile.gif -loop 0 outputfile.gif
+
+-loop 0 says loop infinitely! You can change the number 0 accordingly:
+
+0 means infinitely.
+1 means 1 time
+2 means 2 times
+etc
+
+---
+
+gif to pngs
+
+https://stackoverflow.com/questions/64791544/is-there-are-way-to-save-all-the-frames-of-a-gif-into-pngs-using-ffmpeg
+
+ffmpeg -i your_file.gif -vsync 0 %d.png

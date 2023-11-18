@@ -1,0 +1,85 @@
+:: StoryTitle
+EVISCERATETHISGIRL.COM
+
+:: StoryData
+{
+	"ifid": "078F5F1E-C79F-4785-8D0A-EAFB72642B95",
+	"format": "SugarCube",
+	"format-version": "2.36.1",
+	"start": "Main Menu",
+	"tag-colors": {
+	},
+	"zoom": 0.6
+}
+
+:: StoryInterface {"position":"100,200","size":"100,100"}
+<div id="contents">
+  <div id="bg"></div>
+
+  	<div id="passages"></div>
+    
+</div>
+
+:: StoryInit {"position":"225,200","size":"100,100"}
+/* --- VARIABLES --- */
+<<set $score to 0>>
+<<set $sin to "">>
+<<set $helloVisited to 0>>
+<<set setup.scoreList to []>>
+<<set setup.intervalIDs to new Set()>>
+
+/* --- MUSIC --- */
+<<cacheaudio "eviscerate1" "assets/eviscerate1.mp3">>
+<<cacheaudio "eviscerate2" "assets/eviscerate2.mp3">>
+<<cacheaudio "eviscerate3" "assets/eviscerate3.mp3">>
+<<cacheaudio "eviscerate4" "assets/eviscerate4.mp3">>
+<<cacheaudio "eviscerate5" "assets/eviscerate5.mp3">>
+<<cacheaudio "eviscerate6" "assets/eviscerate6.mp3">>
+<<cacheaudio "eviscerate7" "assets/eviscerate7.mp3">>
+<<cacheaudio "eviscerate8" "assets/eviscerate8.mp3">>
+<<cacheaudio "victory" "assets/eviscerate_victory.mp3">>
+<<cacheaudio "violence" "assets/violence_final.mp3">>
+<<cacheaudio "violence_bg" "assets/violence_bg.mp3">>
+
+/* --- INCLUDES --- */
+/* For dialogue. */
+
+<<include "DialogueInit">>
+
+:: Main Menu {"position":"100,475","size":"100,100"}
+<h2 style="
+	font-family: 'Karmatic Arcade', monospace;
+    color: #ffffff;
+">
+EVISCERATETHISGIRL.COM
+</h2>
+
+<img src="assets/heart_glitch.gif">
+
+[[Play|Intro]]
+[[About]]
+[[Credits]]
+
+:: About {"position":"225,700","size":"100,100"}
+Short game made for the Neo Twiny Jam, with a word limit of 500 words or less. Two endings. Up to ten minutes long.
+
+<<replacelink>>Click to show content warnings.<<becomes>>Horror imagery, gore, mental distress, general edginess...<</replacelink>>
+
+- Contains flashing images and audio. Mute the tab to turn off audio.
+- Don't refresh the game while you're playing. It might break things.
+- Desktop screen recommended. Not compatible with small mobile devices. How sad.
+
+[[Main Menu]]
+
+:: Credits {"position":"25,675","size":"100,100"}
+Most visuals created by me. All of them are public domain. You can do whatever you want with them.
+
+<a class="underline" href="https://processing.org/">Processing</a> and <a class="underline" href="https://photomosh.com/">Photomosh</a> helped with visual effects. Extra Processing methods from https://github.com/anartisticengineer/Glitch-FX-Processing-Version/blob/master/Glitch_FX/Filters.pde.
+
+All music by me, and also public domain. Other public domain sound effects from freesound.org.
+
+Typing effect for dialogue from https://safi.me.uk/typewriterjs/, by Tameem Safi.
+
+HTML5 timer code from https://codepen.io/kaolay/pen/LRVxKd, by Giuseppe Canale.
+
+[[Main Menu]]

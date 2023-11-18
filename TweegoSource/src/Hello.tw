@@ -1,0 +1,245 @@
+:: Hello {"position":"900,475","size":"100,100"}
+\<<nobr>>
+<div id="screen">
+<div id="screenBg"/>
+<div id="edge" style="
+	background-image: url(assets/edge_black.gif),
+    	url(assets/rainbow_screen.gif);
+">
+<div id="screenContents">
+
+<<include "IncludeHeaderElements">>
+
+<<if $helloVisited <= 9>>
+    <<if $helloVisited < 7>>
+    <img src="assets/girl.gif" class="fullscreengif"/>
+    <</if>>
+
+    <<if $helloVisited === 8>>
+    <img src="assets/girl8.gif" class="fullscreengif"/>
+    <<elseif $helloVisited >= 7>>
+    <img src="assets/girl7.gif" class="fullscreengif" style="
+        top: 80px;
+    "/>
+    <<elseif $helloVisited >= 6>>
+    <img src="assets/girl6.gif" class="fullscreengif"/>
+    <<elseif $helloVisited >= 5>>
+    <img src="assets/girl5.gif" class="fullscreengif"/>
+    <<elseif $helloVisited >= 4>>
+    <img src="assets/girl4.gif" class="fullscreengif"/>
+    <</if>>
+<</if>>
+
+<p id="dialogueTextContainer" class="girlA dialogue dialogueA" style="
+	top: 505px;
+    z-index: 25;
+">
+
+<span id="dialogueText">
+</span>
+
+<<link "
+    <img id='link1' src='assets/next_arrow.gif' style='
+        margin-bottom: -3px;
+'/>
+">>
+<<run setup.advanceDialogue()>>
+<</link>>
+
+</p>
+
+<p id="sininput" class="girlA dialogue dialogueA hidden" style="
+    top: 508px;
+    font-size: 18px;
+    z-index: 25;
+    padding: 4px;
+">
+I have committed: 
+
+<input id="textbox-sin" name="textbox-sin"
+    type="text" inputmode="text"
+    tabindex="0" autofocus="autofocus"
+    maxlength="45">
+
+<<link "
+    <img id='link2' src='assets/next_arrow.gif' style='
+        margin-bottom: -3px;
+'/>
+">>
+<<run setup.advanceDialogue()>>
+<</link>>
+
+</p>
+
+</div></div></div>
+
+<div id="narrative" class="hidden">
+
+Her
+
+</div>
+
+<<done>>
+<<script>>
+
+/* Special styling for last dialogue block */
+if (State.variables.helloVisited === setup.dialogueArrayList.length) {
+    const dialogueTextContainer = document.getElementById("dialogueTextContainer");
+    dialogueTextContainer.classList.remove("girlA");
+    dialogueTextContainer.classList.remove("dialogueA");
+    dialogueTextContainer.classList.add("dialogueB");
+
+    const link1 = document.getElementById("link1");
+    link1.classList.add("hidden");
+    link1.parentNode.style.backgroundColor = "#ff0000";
+}
+
+State.variables.helloVisited++;
+
+let dialogueNum = 0;
+
+setup.advanceDialogue = function() {
+    if (State.variables.helloVisited > 0) {
+        if (State.variables.helloVisited <= setup.dialogueArrayList.length - 1) {
+            State.variables.whichDialogue = State.variables.helloVisited - 1;
+        }
+        else {
+            State.variables.whichDialogue = setup.dialogueArrayList.length - 1;
+        }
+    }
+
+	const dialogueArray =
+        setup.dialogueArrayList[State.variables.whichDialogue];
+	showDialogue(dialogueArray);
+};
+
+const showDialogue = function(dialogueArray) {
+
+    /* The last line of dialogue will always be shown in the
+    next passage */
+	if (dialogueNum >= dialogueArray.length - 1) {
+    	Engine.play("Hurt Me");
+    }
+    else { 
+        const narrativeText = "...";
+        document.getElementById("narrative").classList.add("hidden");
+        document.getElementById("narrative").innerText = narrativeText;
+
+        let dialogueTextElement = document.getElementById("dialogueText");
+        dialogueTextElement.innerText = "";
+        let typewriter = new Typewriter(dialogueTextElement, {
+            loop: false,
+            delay: 30,
+            cursor: "",
+        });
+
+        let newDialogue = dialogueArray[dialogueNum];
+
+        /* Special strings trigger special events/text */
+        if (newDialogue.includes("[TIME]")) {
+            const timeStr = new Date().toLocaleTimeString();
+            const str1 = timeStr.slice(0, timeStr.indexOf(":", 3));
+            const str2 = timeStr.slice(-3);
+
+            newDialogue = newDialogue.replace("[TIME]", str1 + str2);
+        }
+        if (newDialogue.includes("[TIME2]")) {
+            let timeText = "";
+
+            let hours = new Date().getHours();
+            if (hours > 22 || hours < 4) {
+                timeText = "late at night"; 
+            }
+            else if (hours >= 4 && hours < 8) {
+                timeText = "early in the morning";
+            }
+            else if (hours >= 8 && hours < 12) {
+                timeText = "wasting your morning";
+            }
+            else if (hours >= 12 && hours < 17) {
+                timeText = "wasting your afternoon";
+            }
+            else if (hours >= 17 && hours < 20) {
+                timeText = "wasting your evening";
+            }
+            else {
+                timeText = "wasting your night";
+            }
+
+            newDialogue = newDialogue.replace("[TIME2]", timeText);
+        }
+        if (newDialogue.includes("[TIME3]")) {
+            let timeText2 = "";
+
+            let hours = new Date().getHours();
+            if (hours > 22 || hours < 8) {
+                timeText2 = "sleeping, or ";
+            }
+            else if ( /* working hours on weekday */
+                (new Date().getDay() % 6 !== 0) &&
+                (hours >= 8 && hours < 17)
+            ) {
+                timeText2 = "working, or ";
+            }
+            else {
+                timeText2 = "";
+            }
+
+            newDialogue = newDialogue.replace("[TIME3]", timeText2);
+        }
+        if (newDialogue.includes("[TRIGGER1]")) {
+            document.getElementById("link1").classList.add("hidden");
+            document.getElementById("sininput").classList.remove("hidden");
+            newDialogue = newDialogue.replace("[TRIGGER1]", "");
+        }
+        if (newDialogue.includes("[TRIGGER2]")) {
+            State.variables.sin = 
+                document.getElementById("textbox-sin").value.trim();
+            if (["nothing", "nothing wrong"].includes(
+                State.variables.sin.toLowerCase())) {
+                State.variables.sin = "";
+            }
+
+            document.getElementById("link1").classList.remove("hidden");
+            document.getElementById("sininput").classList.add("hidden");
+            newDialogue = newDialogue.replace("[TRIGGER2]", "");
+        }
+        if (newDialogue.includes("[SIN]")) {
+            if (State.variables.sin === "") {
+                newDialogue = newDialogue.replace("[SIN]",
+                    "Nothing"
+                );
+            }
+            else {
+                newDialogue = newDialogue.replace("[SIN]",
+                    State.variables.sin.charAt(0).toUpperCase() + State.variables.sin.slice(1)
+                );
+            }
+        }
+        if (newDialogue.includes("[SIN2]")) {
+            if (State.variables.sin === "") {
+                newDialogue = newDialogue.replace("[SIN2]",
+                    "Simply for existing"
+                );
+            }
+            else {
+                newDialogue = newDialogue.replace("[SIN2]",
+                    "For that"
+                );
+            }
+        }
+
+        typewriter.typeString(newDialogue).start();
+
+        dialogueNum++;
+    }
+};
+
+setup.advanceDialogue();
+
+<</script>>
+<</done>>
+
+<<include "ScreenScript">>
+
+<</nobr>>\

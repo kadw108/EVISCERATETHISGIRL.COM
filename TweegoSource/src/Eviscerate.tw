@@ -1,0 +1,691 @@
+:: Eviscerate {"position":"750,625","size":"100,100"}
+\<<nobr>>
+<div id="screen">
+<div id="screenBg"/>
+<div id="edge" style="
+	background-image: url(assets/edge_black.gif),
+        url(assets/rainbow_screen.gif);
+">
+<div id="screenContents">
+
+<<include "IncludeHeaderElements">>
+
+<img src="assets/blood_screen.gif" id="bloodScreen"
+class="fullscreengif noOpacity" style="z-index: 1;"/>
+<img src="assets/blood2_screen.gif" id="bloodScreen2"
+class="fullscreengif noOpacity" style="z-index: 2;"/>
+
+<img src="assets/finalscreen_small1.gif" id="glitchScreen1"
+class="fullscreengif noOpacity" style="z-index: 2;"/>
+<img src="assets/finalscreen_small2.gif" id="glitchScreen2"
+class="fullscreengif noOpacity" style="z-index: 2;"/>
+<img src="assets/finalscreen_small3.gif" id="glitchScreen3"
+class="fullscreengif noOpacity" style="z-index: 2;"/>
+<img src="assets/finalscreen_small4.gif" id="glitchScreen4"
+class="fullscreengif noOpacity" style="z-index: 2;"/>
+<img src="assets/finalscreen_small4.gif" id="glitchScreen5"
+class="fullscreengif noOpacity" style="z-index: 2;"/>
+
+<img src="assets/girl3.gif" id="girl3"
+class="fullscreengif noOpacity" style="z-index: 6; top:20px"/>
+
+<img src="assets/evis_x.gif" id="evisX"
+class="fullscreengif noOpacity" style="z-index: 7;"/>
+<img src="assets/evis_scribble1.gif" id="scribble1"
+class="fullscreengif noOpacity" style="z-index: 8; top:10px"/>
+<img src="assets/evis_scribble2.gif" id="scribble2"
+class="fullscreengif noOpacity" style="z-index: 8; top:50px"/>
+<img src="assets/evis_scribble3.gif" id="scribble3"
+class="fullscreengif noOpacity" style="z-index: 8; top:50px"/>
+
+<img src="assets/evis_crack1.gif" id="crack1"
+class="fullscreengif hidden" style="z-index: 9; top:50px"/>
+<img src="assets/evis_crack2.gif" id="crack2"
+class="fullscreengif hidden" style="z-index: 9; top:50px"/>
+<img src="assets/evis_crack3.gif" id="crack3"
+class="fullscreengif hidden" style="z-index: 9; top:50px"/>
+<img src="assets/evis_crack4.gif" id="crack4"
+class="fullscreengif hidden" style="z-index: 9; top:50px"/>
+
+<img src="assets/edge_black.gif" class="fullscreengif"/>
+
+<<if $helloVisited < 9>>
+    <<if $helloVisited < 7>>
+    <img src="assets/girl.gif" class="fullscreengif"/>
+    <</if>>
+
+    <<if $helloVisited >= 8>>
+    <img src="assets/girl8.gif" class="fullscreengif"/>
+    <<elseif $helloVisited >= 7>>
+    <img src="assets/girl7.gif" class="fullscreengif" style="
+        top: 80px;
+    "/>
+    <<elseif $helloVisited >= 6>>
+    <img src="assets/girl6.gif" class="fullscreengif"/>
+    <<elseif $helloVisited >= 5>>
+    <img src="assets/girl5.gif" class="fullscreengif"/>
+    <<elseif $helloVisited >= 4>>
+    <img src="assets/girl4.gif" class="fullscreengif"/>
+    <</if>>
+<</if>>
+
+<<link '
+<div style="
+	position: relative;
+	top: 120px;
+">
+<div id="hurtButton">
+<img src="assets/click_to_eviscerate.gif"/>
+</div>
+</div>
+'>>
+<<run setup.clickButton()>>
+<</link>>
+
+<div id="score" style="
+	top: 405px;
+    font-size: 50px;
+    color: #ff0000;
+    text-shadow:
+    	3px 3px 0px #000,
+        -3px -3px 0px #000,
+        5px 5px 0px #000,
+        -5px -5px 0px #000,
+        8px 8px 6px #000;
+"><p>
+0
+</p></div>
+
+<div class="girlA dialogue hidden" style="
+	position: absolute;
+	top: 235px;
+    left: 0;
+    right: 0;
+    
+    color: #ff0000;
+    background-color: rgba(50, 0, 0, 0.8);
+    
+    overflow-x: auto;
+    max-width: 90%;
+    direction: rtl;
+    white-space: nowrap;
+    
+    z-index: 3;
+">
+<span style="direction: ltr; display: inline-block;" id="dialogueText">
+/* From https://stackoverflow.com/a/39874526 */
+</span>
+</div>
+
+<div style= "
+	position: relative;
+    top: 290px;
+    left: 650px;
+    width: fit-content;
+">
+<div class="item">
+    <h2></h2>
+    <svg xmlns="http://www.w3.org/2000/svg">
+      <circle id="circle" class="circle_animation" r="15" cy="50%" cx="50%" stroke-width="15" stroke="#dd0099" fill="none"/>
+    </svg>
+</div>
+</div>
+
+
+</div></div></div>
+
+<div id="narrative" class="hidden">
+
+You deserve everything that ever happens to you.
+
+</div>
+
+<<done>>
+<<script>>
+
+State.variables.score = 0;
+
+const increaseScore = function() {
+    State.variables.score++;
+    if (State.variables.helloVisited <= 1) {
+        if (State.variables.score > 75) {
+            State.variables.score++;
+        }
+        else if (State.variables.score > 200) {
+            State.variables.score += Math.round(State.variables.score/200);
+        }
+    }
+    else if (State.variables.helloVisited <= 2) {
+        State.variables.score += 2;
+        if (State.variables.score > 75) {
+            State.variables.score++;
+        }
+        if (State.variables.score > 200) {
+            State.variables.score += Math.round(State.variables.score/100);
+        }
+    }
+    else if (State.variables.helloVisited <= 3) {
+        State.variables.score += 3;
+
+        if (State.variables.score > 20) {
+            State.variables.score += 2;
+        }
+        if (State.variables.score > 100) {
+            State.variables.score += Math.round(State.variables.score/60);
+        }
+        if (State.variables.score > 200) {
+            State.variables.score += Math.round(State.variables.score/80);
+        }
+        if (State.variables.score > 500) {
+            State.variables.score += Math.round(State.variables.score/500);
+        }
+    }
+    else if (State.variables.helloVisited <= 4) {
+        State.variables.score += 3;
+
+        if (State.variables.score > 10) {
+            State.variables.score += 3;
+        }
+        if (State.variables.score > 100) {
+            State.variables.score += Math.round(State.variables.score/25);
+        }
+        if (State.variables.score > 200) {
+            State.variables.score += Math.round(State.variables.score/40);
+        }
+        if (State.variables.score > 500) {
+            State.variables.score += Math.round(State.variables.score/500);
+        }
+        if (State.variables.score > 2000) {
+            State.variables.score += Math.round(State.variables.score/1000);
+        }
+    }
+    else if (State.variables.helloVisited <= 5) {
+        State.variables.score += 4;
+
+        if (State.variables.score > 10) {
+            State.variables.score += 3;
+        }
+        if (State.variables.score > 50) {
+            State.variables.score += Math.round(State.variables.score/10);
+        }
+        if (State.variables.score > 200) {
+            State.variables.score += Math.round(State.variables.score/20);
+        }
+        if (State.variables.score > 500) {
+            State.variables.score += Math.round(State.variables.score/500);
+        }
+        if (State.variables.score > 1000) {
+            State.variables.score += Math.round(State.variables.score/1000);
+        }
+    }
+    else if (State.variables.helloVisited <= 6) {
+        State.variables.score += 5;
+
+        if (State.variables.score > 5) {
+            State.variables.score += 3;
+        }
+        if (State.variables.score > 50) {
+            State.variables.score += Math.round(State.variables.score/8);
+        }
+        if (State.variables.score > 200) {
+            State.variables.score += Math.round(State.variables.score/10);
+        }
+        if (State.variables.score > 500) {
+            State.variables.score += Math.round(State.variables.score/500);
+        }
+        if (State.variables.score > 1000) {
+            State.variables.score += Math.round(State.variables.score/1000);
+        }
+    }
+    else if (State.variables.helloVisited <= 7) {
+        State.variables.score += 5;
+
+        if (State.variables.score > 5) {
+            State.variables.score += 4;
+        }
+        if (State.variables.score > 50) {
+            State.variables.score += Math.round(State.variables.score/6);
+        }
+        if (State.variables.score > 200) {
+            State.variables.score += Math.round(State.variables.score/9);
+        }
+        if (State.variables.score > 500) {
+            State.variables.score += Math.round(State.variables.score/300);
+        }
+        if (State.variables.score > 1000) {
+            State.variables.score += Math.round(State.variables.score/500);
+        }
+    }
+    else if (State.variables.helloVisited <= 8) {
+        State.variables.score += 6;
+
+        if (State.variables.score > 5) {
+            State.variables.score += 5;
+        }
+        if (State.variables.score > 50) {
+            State.variables.score += Math.round(State.variables.score/5);
+        }
+        if (State.variables.score > 200) {
+            State.variables.score += Math.round(State.variables.score/8);
+        }
+        if (State.variables.score > 500) {
+            State.variables.score += Math.round(State.variables.score/50);
+        }
+        if (State.variables.score > 1000) {
+            State.variables.score += Math.round(State.variables.score/100);
+        }
+    }
+};
+
+setup.clickButton = function() {
+    increaseScore(); 
+    const scoreText = document.getElementById("score").firstElementChild;
+    scoreText.innerText = State.variables.score;
+    
+    randomEffect();
+    advanceAnim("evis_bloodstain");
+        
+    const screenContents = document.getElementById("screenContents");
+     
+    const stab = document.createElement("img");
+    stab.classList.add("fullscreengif");
+    stab.src = "assets/evis_stab.gif";
+    stab.style.top = "20px";
+     screenContents.appendChild(stab);
+     setTimeout(() => {
+     	stab.remove();
+     }, 400);
+     
+     document.getElementById("bloodScreen")
+     	.style.opacity = State.variables.score / 500;
+     
+     document.getElementById("bloodScreen2")
+     	.style.opacity = State.variables.score / 5000;
+      
+     document.getElementById("evisX")
+     	.style.opacity = State.variables.score / 1e4;
+       
+     document.getElementById("glitchScreen1")       
+        .style.opacity = (State.variables.score - 3e4) / 2e4;
+
+     document.getElementById("scribble1")
+     	.style.opacity = (State.variables.score - 4e6) / 1e6;
+
+      document.getElementById("glitchScreen2")       
+        .style.opacity = (State.variables.score - 4e7) / 1e7;
+
+     document.getElementById("girl3")
+     	.style.opacity = (State.variables.score - 5e10) / 3e10;
+        
+     document.getElementById("scribble2")
+     	.style.opacity = (State.variables.score - 8e13) / 7e13;
+        
+     document.getElementById("scribble3")
+     	.style.opacity = (State.variables.score - 4e17) / 1e17;
+
+      document.getElementById("glitchScreen3")       
+        .style.opacity = (State.variables.score - 1e12) / 4e12;
+
+      document.getElementById("glitchScreen4")       
+        .style.opacity = (State.variables.score - 8e16) / 4e17;
+
+      document.getElementById("glitchScreen5")       
+        .style.opacity = (State.variables.score - 9e19) / 4e20;
+
+     if (State.variables.score > 8.5e21) {
+       document.getElementById("crack1")
+       	.classList.remove("hidden");
+     }
+     if (State.variables.score > 9e21) {
+       document.getElementById("crack2")
+       	.classList.remove("hidden");
+     }
+     if (State.variables.score > 10e21) {
+       document.getElementById("crack3")
+       	.classList.remove("hidden");
+     }
+     if (State.variables.score > 12e21) {
+       document.getElementById("crack4")
+       	.classList.remove("hidden");
+     }
+     
+     /* dialogueManager(); */
+};
+
+/*
+Dialogue stuff
+Commented out since it's hidden + setInterval performance issues
+*/
+
+/*
+const hurtArray1 = [
+    "I deserve this... ",
+    "I deserve worse... ",
+    "I'm sorry... ",
+    "I'm sorry for being here... ",
+    "I'm sorry for my mistakes... ",
+    "I'm sorry... ",
+    "Sorry... ",
+    "So sorry... ",
+    "This is my fault... ",
+    "It hurts... ",
+    "This is the punishment I deserve... ",
+    "000111000 "
+];
+
+const hurtArray2 = [
+	"All respite is repaid in suffering... ",
+    "Every day I live I accumulate suffering in a counter that ticks up without any upper limit... ",
+    "Happiness only hurts me in the long run... ",
+    "Happiness is meant for other people... ",
+    "I deserve worse than nothing... ",
+    "I don't deserve happiness... ",
+    "I hate myself... ",
+    "Redeem me for my sins... ",
+    "I must suffer before I am allowed to die... ",
+    "I only hurt people... ",
+    "I'm a waste of space... ",
+    "I shouldn't be alive... ",
+    "I'm so sorry... ",
+    "I'm sorry for making you hurt me... ",
+    "I'm subhuman... ",
+    "Kill me... ",
+    "Nothing I do will ever compensate for my mistakes... ",
+    "Send me to Hell... ",
+    "Suffering is the only way to salvation... ",
+    "Suffering is redemption... ",
+    "The souls of the damned burst screaming into the red night sky... ",
+    "345676543458532436856546536 ",
+    "0000101010111010101010 ",
+    "dgergfdshgtruioIHOUGVYUOGUUfdgaergesr ",
+    "45h6tyfddty6575rb6r "
+];
+
+let dialogueCount = 0;
+let countLimit = 4;
+const dialogueManager = function() {
+    if (State.variables.score > 1000 && countLimit === 4) {
+    	countLimit = 3;
+        addDialogueInterval();
+    }
+    else if (State.variables.score > 10000 && countLimit === 3) {
+    	countLimit = 2;
+        addDialogueInterval();
+    }
+    else if (State.variables.score > 100000 && countLimit === 2) {
+    	countLimit = 1;
+        addDialogueInterval();
+        addDialogueInterval();
+    }
+
+	if (dialogueCount < 4) {
+    	dialogueCount++;
+    }
+    else {
+    	dialogueCount = 0;
+        hurtDialogue();
+    }
+};
+
+const addDialogueInterval = function() {
+	  setInterval( () => {
+      	if (trueTypewriter !== null) {
+        	trueTypewriter.typeString(either(pickHurtArray())).start();
+        }
+    }, 500);
+};
+
+const pickHurtArray = function() {
+	const randNum = Math.random() * (State.variables.score / 1000);
+    if (randNum < 1) {
+    	return hurtArray1;
+    }
+    return hurtArray2;
+};
+
+const stopArray = [
+    "Why did you stop?",
+    "Keep hurting me..."
+];
+
+let trueTypewriter = null;
+
+const hurtDialogue = function() {
+	const dialogueTextElement = document.getElementById("dialogueText");
+    
+    (((Can't use getElementById at top-level because of how Twine script tag works
+    It tries to get the element before it loads, or something, same reason 
+    setTimeout doesn't work at top level
+    So, just look for it in the actual function)))
+    
+    if (trueTypewriter === null) {
+    	trueTypewriter = new Typewriter(dialogueTextElement, {
+        loop: false,
+        delay: 30,
+        cursor: "",
+        pauseFor: 1
+    	});
+    }
+    
+    const newDialogue = either(pickHurtArray());
+    
+    if (State.variables.score > 1000 && trueTypewriter.options.delay === 30) {
+    	trueTypewriter.changeDelay(20);
+    }
+    if (State.variables.score > 10000 && trueTypewriter.options.delay === 20) {
+    	trueTypewriter.changeDelay(10);
+    }
+    if (State.variables.score > 100000 && trueTypewriter.options.delay === 10) {
+    	trueTypewriter.changeDelay(1);
+    }
+    
+    trueTypewriter.typeString(newDialogue).start();
+};
+*/
+
+/*
+Randomly determine effect of stab
+*/
+
+const randomEffect = function() {
+	const randomNum = Math.random() * 100;
+    
+    if (randomNum < 75) {
+    	spawnDeco();
+        
+        if (State.variables.score > 1e3) {
+        	spawnDeco();
+        }
+        if (State.variables.score > 5e4) {
+        	spawnDeco();
+        }
+        if (State.variables.score > 1e6) {
+        	spawnDeco();
+        }
+        if (State.variables.score > 1e7) {
+        	spawnDeco();
+        }
+        if (State.variables.score > 1e8) {
+        	spawnDeco();
+        }
+    }
+    else {
+    	advanceAnim("evis_eyes_bleed");
+        const animKeys = Object.keys(harmAnims);
+        const randomAnim = Math.floor(
+        	Math.random () * (animKeys.length - 1)
+        );
+        
+        advanceAnim(animKeys[randomAnim]);
+    }
+};
+
+
+/*
+For advancing harm pictures/animations
+*/
+
+const harmAnims = {
+	"evis_eyes_bleed": {"num": 0, "files": 15},
+    "evis_needles": {"num": 0, "files": 13},
+    "evis_knife": {"num": 0, "files": 15},
+    "evis_bloodstain": {"num": 0, "files": 12}
+    };
+
+const advanceAnim = function(animName) {
+	harmAnims[animName].num++;
+
+	if (harmAnims[animName].num == 1) {
+    	const anim = document.createElement("img");
+        anim.id = animName;
+        anim.classList.add("fullscreengif");
+        anim.src = "assets/" + animName + "/1.png";
+        anim.style.top = "20px";
+        
+        if (animName == "evis_knife") {
+        	anim.style.top = "60px";
+        }
+        
+        const screenContents = document.getElementById("screenContents");
+        screenContents.appendChild(anim);
+    }
+    else if (harmAnims[animName].num <= harmAnims[animName].files) {
+         const anim = document.getElementById(animName);
+    
+    	if (harmAnims[animName].num < harmAnims[animName].files) {
+          anim.src = "assets/" + animName + "/" + harmAnims[animName].num + ".png";
+        }
+        else {
+          anim.src = "assets/" + animName + "/" + harmAnims[animName].num + ".gif";
+        }
+    }
+};
+
+/* 
+Create deco image and shrink it until it's gone
+*/
+
+const decoNames0 = [
+    "deco_skull1.gif", "deco_skull2.gif"
+];
+
+const decoNames1 = [
+	"deco_bone.gif", "deco_cross.gif", "deco_ghost.gif", "deco_grave.gif", "deco_knife.gif"
+];
+
+const glitchDecoNames = [
+	"deco_bone_glitch.gif", "deco_bone_glitch2.gif", "deco_cross_glitch.gif",
+    "deco_ghost_glitch.gif", "deco_grave_glitch.gif", "deco_grave_glitch2.gif",
+    "deco_knife_glitch.gif", "deco_skull_glitch.gif", "deco_skull_glitch2.gif"
+];
+
+const pickDecoName = function() {
+    if (State.variables.score < 200) {
+        return either(decoNames0);
+    }
+	if (State.variables.score < 5e3) {
+    	return either(decoNames0.concat(decoNames1));
+    }
+    else if (State.variables.score < 1e5) {
+    	return either(decoNames0.concat(decoNames1).concat(glitchDecoNames));
+    }
+    else {
+    	return either(glitchDecoNames);
+    }
+};
+
+const spawnDeco = function() {
+	const decoName = pickDecoName();
+
+    const screenContents = document.getElementById("screenContents");
+
+	const leftValue = Math.round(Math.random () *
+    	(screenContents.offsetWidth - 250)) + 65;
+    const topValue = Math.round(Math.random() *
+    	(screenContents.offsetHeight - 500)) + 225;
+
+	const newDeco = document.createElement("img");
+    newDeco.src = "assets/" + decoName;
+    newDeco.style.top = topValue + "px";
+    newDeco.style.left = leftValue + "px";
+    newDeco.width = Math.min(
+    	Math.random() * 20 - 10 + newDeco.width,
+        120);
+    newDeco.style.transform = "rotate(" + (Math.random() * 360) + "deg)";
+    newDeco.classList.add("deco");
+    newDeco.sizeDecrease = Math.random() * 3 + 1;
+
+    screenContents.appendChild(newDeco);
+
+    const intervalID = setInterval( () => {
+      if (newDeco.width - newDeco.sizeDecrease < 0) {
+      	  newDeco.remove();
+            clearInterval(intervalID);
+    	}
+      else {
+          newDeco.width -= newDeco.sizeDecrease;
+      }
+    }, 100);
+    setup.intervalIDs.add(intervalID);
+};
+
+/* For the timer
+From https://codepen.io/kaolay/pen/LRVxKd 
+*/
+
+const timeArray = [70, 60, 40, 30, 25, 21, 21, 20];
+let time = timeArray[State.variables.helloVisited - 1]; /* seconds */
+
+let i = 0;
+let finalOffset = 94; /* the length of strokedasharray ( pixel circumference of the circle -> css ) */
+let step = finalOffset/time;
+/* let timeCaption = document.querySelector( 'h2' ); */
+let circle = document.querySelector( '.circle_animation' ).style;
+
+circle.strokeDashoffset = 0;
+/* timeCaption.innerText = time; */
+
+const interval = setInterval( () => {
+	/* timeCaption.innerText = time - i; */
+	if ( i++ == time ) {
+		clearInterval( interval );
+    } else {
+		circle.strokeDashoffset = step * i;
+	};
+}, 1000 );
+
+
+<</script>>
+<</done>>
+
+<<switch $helloVisited>>
+    <<case 1>>
+        <<audio "eviscerate1" volume 0.5 fadeoverto 20 1>>
+        <<timed 71s>><<goto "Blackscreen">><</timed>> /* 71 */
+    <<case 2>>
+        <<audio "eviscerate2" volume 0.6 fadeoverto 10 1>>
+        <<timed 60s>><<goto "Blackscreen">><</timed>> /* 60 */
+    <<case 3>>
+        <<audio "eviscerate3" volume 0.7 fadeoverto 5 1>>
+        <<timed 40s>><<goto "Blackscreen">><</timed>> /* 40 */
+    <<case 4>>
+        <<audio "eviscerate4" volume 0.8 fadeoverto 2 1>>
+        <<timed 30s>><<goto "Blackscreen">><</timed>> /* 30 */
+    <<case 5>>
+        <<audio "eviscerate5" volume 0.9 fadeoverto 1 1>>
+        <<timed 26s>><<goto "Blackscreen">><</timed>> /* 25 */
+    <<case 6>>
+        <<audio "eviscerate6" play>>
+        <<timed 21s>><<goto "Blackscreen">><</timed>> /* 21 */
+    <<case 7>>
+        <<audio "eviscerate7" play>>
+        <<timed 21s>><<goto "Blackscreen">><</timed>> /* 21 */
+    <<case 8>>
+        <<audio "eviscerate8" play>>
+        <<timed 20s>><<goto "Blackscreen">><</timed>> /* 20 */
+    <<default>>
+<</switch>>
+
+<<include "ScreenScript">>
+
+<</nobr>>\

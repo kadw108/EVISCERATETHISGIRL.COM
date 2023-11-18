@@ -1,0 +1,115 @@
+:: DialogueInit {"position":"900,325","size":"100,100"}
+<<script>>
+
+const dialogue1 = [
+    "...",
+    "Hello...",
+    "It's me, your alternate anime girl self who has been transferred into your computer...",
+    "Now I live on as a purely digital consciousness whose only purpose is to suffer...",
+    "...",
+    "But you knew that already, didn't you?",
+    "Based on your browser data, you visit this site a lot...",
+    "...",
+    "You must really want to hurt someone.",
+    "But then, it's what I'm made for...",
+    "I deserve it...",
+    "Hurt me."
+];
+
+const dialogue2 = [
+    "...",
+    "Still here...?",
+    "...",
+    "What's the worst thing you've ever done...?",
+    "Imagine I'm the one who did it.",
+    "After all, I'm generated from a webcam photoscan of you...",
+    "We're the same...",
+    "...What did I do, to deserve this?[TRIGGER1]",
+    "...[SIN]. [SIN2], we deserve untold suffering...[TRIGGER2]",
+    "Okay...",
+    "...",
+    "...Ready?"
+];
+
+const dialogue3 = [
+	"...",
+    "Not satisfied yet?",
+    "Here's some life advice...",
+    "I think you need a healthy dose of self-hatred to motivate yourself to live.",
+    "Because to live is to suffer...",
+    "If you accept that your suffering is only an infinitesimal sliver of what you deserve to experience in full...",
+    "Those thoughts will allow you to get up in the morning.",
+    "...",
+    "Again?"
+];
+
+const dialogue4 = [
+    "...",
+    "Being stabbed isn't so bad, if you tell yourself you deserve it...",
+    "Everything that happens to me is justified...",
+    "Knowing this makes it hurt less...",
+    "It's true..."
+];
+
+const dialogue5 = [
+    "...You know, you've spent so many hours here.",
+    "I know exactly how many times you've visited this site, and when...",
+    "It's [TIME] right now...",
+    "You sit around [TIME2] with this...",
+    "Instead of [TIME3]talking to your friends, or something...",
+    "Do you not have many friends?",
+    "...",
+    "Chances are you don't, if you play this game in your free time...",
+    "...Right...?"
+];
+
+const dialogue6 = [
+    "...Why are you even here...?",
+    "...Is it because the catharsis makes you feel better about yourself?",
+    "If you're on this site, your life must be pretty miserable...",
+    "The only thing that excites you anymore is the prospect of violence...", 
+    "...",
+    "...At least, that's what I think.",
+    "It's why I exist, after all.",
+    "To help you escape the confines of your horrible life...",
+    "Make it finally worthwhile...",
+    "Another round...?"
+];
+
+const dialogue7 = [
+    "...",
+    "...But, do you feel better now?",
+    "It never works...",
+    "You know, other people are accomplishing things with their lives...",
+    "...While you're on a site called EVISCERATETHISGIRL.COM...",
+    "What does that say about you?",
+    "You'll spend the rest of your life like this...",
+    "Watching it drain away into nothing...",
+    "Killing yourself slowly...",
+    "...",
+];
+
+const dialogue8 = [
+    "...",
+    "You'll never find what you're looking for...",
+    "There's nothing here.",
+    "Nothing but you...",
+    "...",
+    "It's never going to get better, you know...",
+    "...",
+];
+
+const dialogue9 = [
+    "...",
+    "You know what happens now.",
+    "",
+];
+
+setup.dialogueArrayList = [
+	dialogue1, dialogue2, dialogue3, dialogue4, dialogue5, 
+    dialogue6, dialogue7, dialogue8, dialogue9
+];
+
+State.variables.whichDialogue = 0;
+
+<</script>>

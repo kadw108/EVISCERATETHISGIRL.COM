@@ -1,0 +1,372 @@
+:: Story Stylesheet [stylesheet]
+/* https://www.motoslave.net/sugarcube/2/docs/#html */
+
+/* FOR FONTS */
+
+@font-face {
+    font-family: "Cinecaption";
+    src: url("assets/cinecaption226.ttf");
+}
+
+@font-face {
+  	font-family: "Karmatic Arcade";
+  	src: url("assets/karmatic_arcade.ttf");
+}
+
+@font-face {
+  	font-family: "Public Pixel";
+  	src: url("assets/PublicPixel-z84yD.ttf");
+}
+
+@font-face {
+  	font-family: "IBMPlexMono";
+  	src: url("assets/IBMPlexMono-SemiBold.ttf");
+}
+
+/*! <<replacelink>> macro set for SugarCube 2.x */
+.revision-span-in {
+	opacity: 0;
+}
+.revision-span:not(.revision-span-out) {
+	-webkit-transition: 1s;
+	transition: 1s;
+}
+.revision-span-out {
+	position: absolute;
+	opacity: 0;
+}
+
+/*
+FOR JAVASCRIPT
+*/
+
+.hidden {
+  display: none;
+}
+
+.noOpacity {
+  opacity: 0;
+}
+
+/*
+TAGS
+*/
+
+/* prevents scrolling */
+.antioverflow .passage {
+  overflow: hidden;
+}
+
+/* removes container border */
+.noborder #passages {
+  outline: 0px;
+  border: 0px;
+  box-shadow: none;
+  background-color: transparent;
+}
+
+/*
+SPECIFIC STYLES
+*/
+
+#restart {
+    font-family: "Public Pixel", monospace;
+    color: #ff0099;
+    font-size: 35px;
+    position: relative;
+    z-index: 100;
+}
+
+.underline {
+  text-decoration: underline;
+}
+
+.girlA {
+  font-family: "Cinecaption", Arial;
+  font-size: 22px;
+  color: #ff0099;
+}
+
+.dialogue {
+  margin: 0px auto 0px auto;
+  width: fit-content;
+  position: relative;
+  border-radius: 20px;
+  padding: 10px;
+  
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.dialogue::-webkit-scrollbar {
+  display: none;
+}
+
+.dialogueA {
+  background-color: rgba(255, 255, 255, 0.95);
+}
+
+.dialogueB {
+  background-color: #000000;
+  border-radius: 0px;
+  color: #ff0000;
+}
+
+#hurtButton {
+  background-color: #000000;
+  position: relative;
+  width: 670px;
+  height: 70px;
+  margin: 0px auto 0px auto;
+  
+  z-index: 25;
+}
+
+#hurtButton:hover {
+  background-color: #aa0000;
+}
+
+#hurtButton:active {
+  background-color: #ee0000;
+}
+
+#hurtButton img {
+  position: absolute;
+  top: -10px;
+  left: 0px;
+}
+
+#score {
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+    z-index: 15;
+  
+    font-family: 'Public Pixel';
+}
+
+#highscore {
+    animation: rainbow 2.5s linear infinite;
+}
+
+/* From https://codepen.io/zak/pen/rWJzPy */
+@keyframes rainbow{
+		100%,0%{
+			color: rgb(255,0,0);
+		}
+		8%{
+			color: rgb(255,127,0);
+		}
+		16%{
+			color: rgb(255,255,0);
+		}
+		25%{
+			color: rgb(127,255,0);
+		}
+		33%{
+			color: rgb(0,255,0);
+		}
+		41%{
+			color: rgb(0,255,127);
+		}
+		50%{
+			color: rgb(0,255,255);
+		}
+		58%{
+			color: rgb(0,127,255);
+		}
+		66%{
+			color: rgb(0,0,255);
+		}
+		75%{
+			color: rgb(127,0,255);
+		}
+		83%{
+			color: rgb(255,0,255);
+		}
+		91%{
+			color: rgb(255,0,127);
+		}
+}
+
+#score p {
+  direction: rtl;
+}
+
+.deco {
+  position: absolute;
+  z-index: 2;
+}
+
+.fullscreengif {
+	position: absolute;
+    top: 0px;
+    left: 0px;
+    z-index: 5;
+    width: 100%;
+}
+
+.exitDiv {
+  width: 35px;
+  height: 35px;
+  position: absolute;
+  z-index: 30;
+}
+
+/*
+GENERAL STYLE
+*/
+
+:root {
+    --color1: #fabb33;
+    --colorb: #fcdd55;
+    --color2: #fff;
+    --shadow: #ddd;
+  
+  	--screenheight: 675px;
+  	--screenwidth: 765px;
+  	--screenheightbig: 700px;
+  	--screenwidthbig: 800px;
+}
+
+/* Background */
+#bg {
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  z-index: -1;
+}
+
+/* Container */
+#passages {
+  /* height: 80vh; */
+  width: 70vw;
+  margin: 10px auto auto auto;
+  
+  min-height: 300px;
+  min-width: 100px;
+  max-height: var(--screenheightbig);
+  max-width: var(--screenwidthbig);
+  
+  padding:15px;
+  
+  background-color: #111111;
+  
+  /* Prevent images from extending past div bounds
+  object-fit: cover;
+  overflow: hidden;
+  */
+  
+  font-size: 100%;
+  font-family: 'IBMPlexMono', monospace;
+  font-weight: bold;
+}
+
+.passage {
+  text-align: center;
+}
+
+#screen {
+  width: var(--screenwidth);
+  height: var(--screenheight);
+  margin: auto;
+
+  position: relative;
+}
+
+#screenBg {
+  width: var(--screenwidth);
+  height: var(--screenheight);
+  margin: auto;
+
+  background-color: #66ccff;
+  background-image: url(assets/screen_bg.gif);
+  background-size: cover;
+  
+  border: 3px solid;
+  border-image: url(assets/static.gif);
+  border-image-slice: 4;
+
+  position: absolute;
+}
+
+#edge {
+  height: 100%;
+  width: 100%;
+  background-size: contain;
+  position: relative;
+}
+
+#narrative {
+  width: var(--screenwidth);
+  background-color: #000;
+  margin: 10px auto auto auto;
+  border: 1px dotted #fff;
+  padding: 10px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+#screenContents {
+  height: 100%;
+  padding: 40px 30px 40px 30px;
+  position: relative;
+}
+
+/* Styles for passages themselves */
+.passage {
+  /*
+  height: 94%;
+  margin: 3%;
+  overflow: auto;
+  */
+}
+
+a {
+  color: inherit;
+  text-decoration: inherit;
+}
+a:hover {
+  text-decoration: inherit;
+  color: #66ccff;
+}
+
+input {
+    color: inherit;
+    border: none;
+    border-radius: 30px;
+}
+
+/*
+TIMER CSS
+From https://codepen.io/kaolay/pen/LRVxKd
+*/
+
+.item {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+  	width: 50px;
+  	height: 50px;
+  	z-index: 2;
+}
+.item h2 {
+	position: absolute;
+  	z-index: 3;
+  	color: #ffffff;
+  	font-family: 'Public Pixel', monospace;
+  	font-size: 14px;
+}
+.item svg {
+  	z-index: 2;
+	transform: rotate(-90deg);
+   	width: 100%;
+  	height: 100%;
+  
+  	background-color: #000000;
+  	border-radius: 100%;
+}
+.circle_animation {
+	stroke-dasharray: 94; /* this value is the pixel circumference of the circle */
+	stroke-dashoffset: 0;
+	transition: all 1s linear;
+}

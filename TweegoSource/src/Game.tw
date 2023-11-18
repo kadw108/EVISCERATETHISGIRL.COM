@@ -1,0 +1,440 @@
+:: IncludeHeaderElements {"position":"450,400","size:":"100,100"}
+\<<nobr>>
+
+<a class="link link-internal" data-passage="Ending" tabindex="0">
+    <div class="exitDiv" style="
+        left: 83%;
+    "/>
+</a>
+<a class="link link-internal" data-passage="Ending" tabindex="0">
+    <div class="exitDiv" style="
+        left: 91%;
+    "/>
+</a>
+<a class="link link-internal" data-passage="Ending" tabindex="0">
+    <div class="exitDiv" style="
+        left: 33.5%;
+        top: 10%;
+    "/>
+</a>
+<a id="refreshButton" class="link link-internal hidden" tabindex="0">
+    <div class="exitDiv" style="
+        left: 11.5%;
+        top: 15%;
+        width: 25px;
+        height: 25px;
+    "/>
+</a>
+
+<img src="assets/glitch0.gif" id="glitch0"
+    class="fullscreengif noOpacity" style="z-index: 20;"
+/>
+<img src="assets/glitch1.gif" id="glitch1"
+    class="fullscreengif noOpacity" style="z-index: 20;"
+/>
+<img src="assets/glitch2.gif" id="glitch2"
+    class="fullscreengif noOpacity" style="z-index: 20;"
+/>
+<img src="assets/glitch3.gif" id="glitch3"
+    class="fullscreengif noOpacity" style="z-index: 20;"
+/>
+<img src="assets/glitch4.gif" id="glitch4"
+    class="fullscreengif noOpacity" style="z-index: 20;"
+/>
+
+<<done>>
+<<script>>
+
+const clickRefresh = () => {
+    if (passage() === "Victory") {
+        Engine.play("Hello");
+    }
+    else {
+        const narrative = document.getElementById("narrative");
+        narrative.innerText = "I need to win first...";
+        narrative.classList.remove("hidden");
+    }
+};
+document.getElementById("refreshButton").onclick = clickRefresh;
+
+if (State.variables.helloVisited > 1) {
+    document.getElementById("glitch0").classList.remove("noOpacity");
+}
+if (State.variables.helloVisited > 2) {
+    document.getElementById("glitch1").classList.remove("noOpacity");
+}
+if (State.variables.helloVisited > 3) {
+    document.getElementById("glitch2").classList.remove("noOpacity");
+}
+if (State.variables.helloVisited > 4) {
+    document.getElementById("glitch3").classList.remove("noOpacity");
+}
+if (State.variables.helloVisited > 5) {
+    document.getElementById("glitch4").classList.remove("noOpacity");
+}
+
+<</script>>
+<</done>>
+
+<</nobr>>\
+
+:: ScreenScript {"position":"450,200","size":"100,100"}
+\<<nobr>>
+
+<<done>>
+<<script>>
+
+const screen = document.getElementById("screenBg");
+switch (State.variables.helloVisited) {
+    case 0:
+        screen.style.opacity = 1;
+    case 1:
+        screen.style.opacity = 0.95;
+        break;
+    case 2:
+        screen.style.opacity = 0.9;
+        break;
+    case 3:
+        screen.style.opacity = 0.8;
+        break;
+    case 4:
+        screen.style.opacity = 0.7;
+        break;
+    case 5:
+        screen.style.opacity = 0.55;
+        break;
+    case 6:
+        screen.style.opacity = 0.35;
+        break;
+    case 7:
+        screen.style.opacity = 0.25;
+        break;
+    case 8:
+        screen.style.opacity = 0.1;
+        break;
+    default:
+        screen.style.opacity = 0;
+        break;
+}
+
+<</script>>
+<</done>>
+
+<</nobr>>\
+
+:: Intro {"position":"450,475","size":"100,100"}
+\<<nobr>>
+<div id="screen">
+<div id="screenBg"/>
+<div id="edge" style="
+	background-image: url(assets/edge_black.gif),
+    	url(assets/search_preintro.gif);
+">
+<div id="screenContents" onclick="triggerType()">
+
+/* Use special links instead of include IncludeHeaderElements macro because of 
+clickExit() function which I cannot get to work in IncludeHeaderElements
+ */
+<a class="link link-internal" data-passage="Ending" tabindex="0" onclick="clickExit()">
+    <div class="exitDiv" style="
+        left: 83%;
+    "/>
+</a>
+<a class="link link-internal" data-passage="Ending" tabindex="0" onclick="clickExit()">
+    <div class="exitDiv" style="
+        left: 91%;
+    "/>
+</a>
+<a class="link link-internal" data-passage="Ending" tabindex="0" onclick="clickExit()">
+    <div class="exitDiv" style="
+        left: 33.5%;
+        top: 10%;
+    "/>
+</a>
+
+<a id="visitButton" data-passage="Camera" class="link-internal link-image hidden">
+    <img src="assets/search.gif" style="
+        position: relative;
+        top: 65px;
+        left: 280px;
+        z-index: 25;
+    "/>
+</a>
+
+</div></div></div>
+
+<div id="narrative">
+
+Can't sleep...
+
+</div>
+
+<script>
+let triggeredExit = false;
+let triggeredType = false;
+
+function clickExit() {
+    triggeredExit = true;
+}
+
+function triggerType() {
+	if (!triggeredExit && !triggeredType) {
+    	document.getElementById("edge").style["background-image"] = '
+            url(assets/edge_black.gif), url(assets/search_intro.gif)';
+   		triggeredType = true;
+    
+    	setTimeout(
+        	function() {
+            	const visitButton = document.getElementById("visitButton");
+                if (visitButton !== null) {
+                    visitButton.classList.remove("hidden");
+                }
+        }, 2350);
+    }
+}
+</script>
+
+
+<<include "ScreenScript">>
+
+<</nobr>>\
+
+
+:: Camera {"position":"600,475","size":"100,100"}
+\<<nobr>>
+<div id="screen">
+<div id="screenBg"/>
+<div id="edge" style="
+	background-image: url(assets/edge_black.gif),
+    	url(assets/camera_screen.gif);
+">
+<div id="screenContents">
+
+<<include "IncludeHeaderElements">>
+
+<a data-passage="Glitter" class="link-internal link-image">
+<img src="assets/camera.gif" style="
+	position: relative;
+    top: 555px;
+    left: 100px;
+    z-index: 20;
+"/>
+</a>
+
+</div></div></div>
+
+<div id="narrative">
+
+Here again...
+
+</div>
+
+<<include "ScreenScript">>
+
+<</nobr>>\
+
+
+:: Glitter {"position":"750,475","size":"100,100"}
+\<<nobr>>
+<div id="screen">
+<div id="screenBg"/>
+<div id="edge" style="
+	background-image: url(assets/edge_black.gif),
+        url(assets/transformation_loading.gif),
+    	url(assets/transform_screen2.gif);
+">
+<div id="screenContents">
+
+<<include "IncludeHeaderElements">>
+
+<img src="assets/heart_white.gif" style="
+	position: relative;
+    top: 430px;
+"/>
+
+</div></div></div>
+
+<div id="narrative" class="hidden">
+
+...
+
+</div>
+
+<<timed 1.5s>><<goto "Hello">><</timed>>
+
+<<include "ScreenScript">>
+
+<</nobr>>\
+
+
+
+:: Victory {"position":"450,625","size":"100,100"}
+\<<nobr>>
+<div id="screen">
+<div id="screenBg"/>
+<div id="edge" style="
+	background-image: url(assets/edge_black.gif),
+    	url(assets/rainbow_screen.gif);
+">
+<div id="screenContents">
+
+<<include "IncludeHeaderElements">>
+
+<img src="assets/victory_bg.gif" class="fullscreengif" style="top:25px;">
+<img src="assets/victory_message.gif" class="fullscreengif" style="top:25px;">
+<img src="assets/victory_border.gif" class="fullscreengif" style="top:25px;">
+
+<img src="assets/heart_glitch.gif" style="
+	position: relative;
+    top: 44%;
+    z-index: 7;
+"/>
+
+<div id="score" style="
+	top: 265px;
+    font-size: 20px;
+    color: #ef0077;
+    text-shadow: 2px 2px 2px #000000;
+"><p>
+Score:
+<span style="font-size: 150%;"><<print setup.toPlainString($score)>></span>
+</p></div>
+
+<p id="highscore" class="hidden" style="
+    text-shadow: 2px 2px 2px #000000;
+    position: relative;
+    font-size: 14px;
+    z-index: 15;
+    top: 230px;
+    font-family: 'Public Pixel';
+">
+    HIGH SCORE!!!
+</p>
+
+<a data-passage="Hello" class="link-internal link-image">
+<img src="assets/play_again.gif" style="
+	position: absolute;
+    top: 590px;
+    left: 0;
+    right: 0;
+    margin: auto;
+    z-index: 25;
+"/>
+</a>
+
+</div></div></div>
+
+<div id="narrative" class="hidden">
+
+Victory.
+
+</div>
+
+<<audio "victory" play>>
+
+<<done>>
+<<script>>
+
+if (State.variables.score > Math.max(...setup.scoreList)) {
+    document.getElementById("highscore").classList.remove("hidden");
+}
+
+setup.scoreList.push(State.variables.score);
+
+for (const id of setup.intervalIDs) {
+    clearInterval(id);
+}
+setup.intervalIDs.clear();
+
+<</script>>
+<</done>>
+
+<<include "ScreenScript">>
+
+<</nobr>>\
+
+
+:: Ending {"position":"450,800","size":"100,100"}
+\<<nobr>>\
+<img id="ending1gif" src="assets/ending.gif" style="
+	width: 600px;
+    
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+"/>
+
+<p id="restart" class="noOpacity hidden">
+<<link 'Again?'>>
+<<run Engine.restart()>>
+<</link>>
+</p>
+
+<<done>>
+<<script>>
+/* Reset gif so it plays every time
+From https://intfiction.org/t/replay-non-looping-gif/50546/7
+and https://stackoverflow.com/questions/10730212/proper-way-to-reset-a-gif-animation-with-displaynone-on-chrome
+*/
+const ending1gif = document.getElementById("ending1gif");
+ending1gif.src = ending1gif.src.replace(/\?.*$/,"")+"?x=" + Date.now();
+
+/* Trigger restart button */
+let restartOpacity = 0;
+setTimeout(() => {
+    document.getElementById("restart").classList.remove("hidden");
+
+    const intervalID = setInterval(() => {
+        restartOpacity += 0.01;
+        document.getElementById("restart").style.opacity = restartOpacity;
+        if (restartOpacity >= 1) {
+            clearInterval(intervalID);
+        }
+    }, 50);
+}, 9000);
+
+<</script>>
+<</done>>
+
+<<audio "eviscerate1" stop>>
+<<audio "eviscerate2" stop>>
+<<audio "eviscerate3" stop>>
+<<audio "eviscerate4" stop>>
+<<audio "eviscerate5" stop>>
+<<audio "eviscerate6" stop>>
+<<audio "eviscerate7" stop>>
+<<audio "eviscerate8" stop>>
+
+<<audio "victory" stop>>
+
+<</nobr>>\
+
+
+:: Blackscreen {"position":"600,625","size":"100,100"}
+\<<nobr>>
+<div id="screen">
+<div id="screenBg"/>
+<div id="edge" style="
+	background-image: url(assets/edge_black.gif),
+        url(assets/black_screen.png);
+">
+<div id="screenContents">
+
+<<include "IncludeHeaderElements">>
+
+</div></div></div>
+
+<div id="narrative" class="hidden">
+
+...
+
+</div>
+
+<<timed 1s>><<goto "Victory">><</timed>>
+
+<<include "ScreenScript">>
+
+<</nobr>>\

@@ -1,0 +1,7 @@
+sugarcube-2:
+  macros:
+    replacelink:
+      name: replacelink
+      container: true
+    becomes:
+      name: becomes

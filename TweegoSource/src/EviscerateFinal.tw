@@ -1,0 +1,233 @@
+:: EviscerateFinal {"position":"750,655","size":"100,100"}
+\<<nobr>>
+
+<p id="restart" class="noOpacity hidden">
+<<link 'Again?'>>
+<<run Engine.restart()>>
+<</link>>
+</p>
+
+<div id="screen">
+<div id="screenBg"/>
+<div id="edge" style="
+	background-image: url(assets/edge_black.gif),
+        url(assets/finalscreen_small1.gif);
+">
+<div id="screenContents">
+
+<img src="assets/glitch0.gif" id="glitch0"
+    class="fullscreengif noOpacity" style="z-index: 20;"
+/>
+<img src="assets/glitch1.gif" id="glitch1"
+    class="fullscreengif noOpacity" style="z-index: 20;"
+/>
+<img src="assets/glitch2.gif" id="glitch2"
+    class="fullscreengif noOpacity" style="z-index: 20;"
+/>
+<img src="assets/glitch3.gif" id="glitch3"
+    class="fullscreengif noOpacity" style="z-index: 20;"
+/>
+<img src="assets/glitch4.gif" id="glitch4"
+    class="fullscreengif noOpacity" style="z-index: 20;"
+/>
+
+<img src="assets/blood_screen.gif" id="bloodScreen"
+class="fullscreengif noOpacity" style="z-index: 1;"/>
+<img src="assets/blood2_screen.gif" id="bloodScreen2"
+class="fullscreengif noOpacity" style="z-index: 2;"/>
+
+<img src="assets/finalscreen_small1.gif" id="glitchScreen1"
+class="fullscreengif noOpacity" style="z-index: 2;"/>
+<img src="assets/finalscreen_small2.gif" id="glitchScreen2"
+class="fullscreengif noOpacity" style="z-index: 2;"/>
+<img src="assets/finalscreen_small3.gif" id="glitchScreen3"
+class="fullscreengif noOpacity" style="z-index: 2;"/>
+
+<img src="assets/finalscreen_small4.gif" id="glitchScreen4"
+class="fullscreengif noOpacity" style="
+    z-index: 2;
+"/>
+
+<img src="assets/finalscreen_small4.gif" id="glitchScreen5"
+class="fullscreengif noOpacity" style="
+    z-index: 2;
+"/>
+
+<<link '
+<div style="
+    position: relative;
+    top: 120px;
+">
+<div id="hurtButton">
+<img src="assets/click_to_eviscerate.gif"/>
+</div>
+</div>
+'>>
+<<audio "violence" play>>
+<<audio "violence_bg" loop play>>
+<<run setup.clickButton()>>
+<</link>>
+
+<div id="score" style="
+	top: 405px;
+    font-size: 50px;
+    color: #ff0000;
+    text-shadow:
+    	3px 3px 0px #000,
+        -3px -3px 0px #000,
+        5px 5px 0px #000,
+        -5px -5px 0px #000,
+        8px 8px 6px #000;
+"><p>
+0
+</p></div>
+
+</div></div></div>
+
+<script>
+
+/* Mouse movement freezes when clicking button */
+/*
+const test = document.getElementById("hurtButton");
+test.addEventListener("click", async() => {
+    await test.requestPointerLock();
+});
+*/
+
+</script>
+
+<<done>>
+<<script>>
+
+let restartOpacity = 0;
+setTimeout(() => {
+    document.getElementById("restart").classList.remove("hidden");
+
+    const intervalID = setInterval(() => {
+        restartOpacity += 0.01;
+        document.getElementById("restart").style.opacity = restartOpacity;
+        if (restartOpacity >= 1) {
+            clearInterval(intervalID);
+        }
+    }, 50);
+}, 10000);
+
+let hasPressed = false;
+let blacknessOpacity = 0;
+
+State.variables.score = 0;
+
+setup.clickButton = function() {
+    if (!hasPressed) {
+        setInterval(() => {
+            State.variables.score++;
+            State.variables.score += Math.round(State.variables.score/10);
+            const scoreText = document.getElementById("score").firstElementChild;
+            scoreText.innerText = State.variables.score;
+        }, 50);
+
+        setInterval(() => {
+            periodicUpdate();
+        }, 50);
+ 
+        /* Need to create blackness dynamically or it will cover #hurtButton */
+        const blackness = document.createElement("div");
+        blackness.id = "blackness";
+        Object.assign(blackness.style, {
+            "width": "100%",
+            "height": "100%",
+            "position": "fixed",
+            "top": "0",
+            "left": "0",
+            "opacity": "1",
+            "backgroundColor": "#000000",
+            "zIndex": "50"
+        });
+        const screen = document.getElementById("screen");
+        screen.before(blackness);
+        /*
+        setInterval(() => {
+            blacknessOpacity += 0.01;
+            document.getElementById("blackness")
+                .style.opacity = blacknessOpacity;
+        }, 250);
+        */
+
+        setTimeout(() => {
+            advanceAnim("evis_bloodstain2");
+        }, 600);
+        setInterval(() => {
+            setTimeout(() => {
+                advanceAnim("evis_bloodstain2");
+            }, Math.random() * 2000 + 500);
+        }, 1500);
+
+        hasPressed = true;
+    }
+};
+
+let periodicUpdate = function() {
+    if (State.variables.score <= 30000000) {
+        document.getElementById("bloodScreen")
+            .style.opacity = State.variables.score/5000;
+        
+        document.getElementById("bloodScreen2")
+            .style.opacity = State.variables.score/500000;
+
+        document.getElementById("glitch0")
+            .style.opacity = State.variables.score/100;
+        document.getElementById("glitch1")
+            .style.opacity = State.variables.score/2000;
+        document.getElementById("glitch2")
+            .style.opacity = State.variables.score/10000;
+        document.getElementById("glitch3")
+            .style.opacity = State.variables.score/20000;
+        document.getElementById("glitch4")
+            .style.opacity = State.variables.score/30000;
+
+        document.getElementById("glitchScreen2")       
+            .style.opacity = (State.variables.score - 4e3) / 1e3;
+
+        document.getElementById("glitchScreen3")       
+            .style.opacity = (State.variables.score - 1e5) / 4e5;
+
+        document.getElementById("glitchScreen4")       
+            .style.opacity = (State.variables.score - 8e10) / 4e10;
+
+        document.getElementById("glitchScreen5")       
+            .style.opacity = (State.variables.score - 9e12) / 1e12;
+    }
+};
+
+const harmAnims = {
+    "evis_bloodstain2": 
+        {"num": 0,
+        "files": ["1.png", "2.png", "3.gif", "4.png",
+        "5.gif", "6.png", "7.gif", "8.png", "9.gif", "10.png"]}
+};
+
+const advanceAnim = function(animName) {
+    if (harmAnims[animName].num < harmAnims[animName].files.length) {
+        const anim = document.createElement("img");
+        anim.id = animName;
+        anim.classList.add("fullscreengif");
+        anim.src = "assets/" + animName + "/" + harmAnims[animName].files[
+            harmAnims[animName].num
+        ];
+        anim.style.top = "20px";
+        anim.style.zIndex = "40";
+        anim.style.opacity = "0.9";
+        
+        const screenContents = document.getElementById("screenContents");
+        screenContents.appendChild(anim);
+
+        harmAnims[animName].num++;
+    }
+};
+
+<</script>>
+<</done>>
+
+<<include "ScreenScript">>
+
+<</nobr>>\
