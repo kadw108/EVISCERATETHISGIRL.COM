@@ -197,10 +197,11 @@ const showDialogue = function(dialogueArray) {
             newDialogue = newDialogue.replace("[TRIGGER1]", "");
         }
         if (newDialogue.includes("[TRIGGER2]")) {
-            State.variables.sin = 
-                document.getElementById("textbox-sin").value.trim();
-            if (["nothing", "nothing wrong"].includes(
-                State.variables.sin.toLowerCase())) {
+            State.variables.sin = document.getElementById("textbox-sin").value.trim();
+            if (
+                (["nothing", "nothing wrong"].includes(State.variables.sin.toLowerCase())) ||
+                (new RegExp("^[\.\s]+$").test(State.variables.sin.trim())) /* periods + spaces only */
+            ) {
                 State.variables.sin = "";
             }
 
@@ -251,19 +252,18 @@ setup.advanceDialogue();
     <<case 1>>
         <<audio "neutral1" loop play>>
     <<case 2>>
-        <<audio "neutral2" volume 0.9 loop play>>
+        <<audio "neutral2" loop volume 0 fadein>>
     <<case 3>>
-        <<audio "neutral3" volume 0.9 loop play>>
+        <<audio "neutral3" loop volume 0 fadein>>
     <<case 4>>
-        <<audio "neutral4" volume 0.9 loop play>>
+        <<audio "neutral4" loop volume 0 fadein>>
     <<case 5>>
-        <<audio "neutral5" volume 0.9 loop play>>
+        <<audio "neutral5" loop volume 0 fadein>>
     <<case 6>>
-        <<audio "neutral6" volume 0.9 loop play>>
+        <<audio "neutral6" loop volume 0 fadein>>
     <<case 7>>
-        <<audio "neutral7" volume 0.9 loop play>>
+        <<audio "neutral7" loop volume 0 fadein>>
     <<case 8>>
-        <<audio "neutral8" volume 0.9 loop play>>
     <<default>>
 <</switch>>
 <</done>>

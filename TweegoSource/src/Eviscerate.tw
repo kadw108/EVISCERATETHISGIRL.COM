@@ -349,113 +349,167 @@ setup.clickButton = function() {
        	.classList.remove("hidden");
      }
      
-     /* dialogueManager(); */
+     dialogueManager();
 };
 
 /*
 Dialogue stuff
-Commented out since it's hidden + setInterval performance issues
 */
 
-/*
 const hurtArray1 = [
-    "I deserve this... ",
-    "I deserve worse... ",
-    "I'm sorry... ",
-    "I'm sorry for being here... ",
-    "I'm sorry for my mistakes... ",
-    "I'm sorry... ",
-    "Sorry... ",
-    "So sorry... ",
-    "This is my fault... ",
-    "It hurts... ",
-    "This is the punishment I deserve... ",
-    "000111000 "
+    "I deserve nothing",
+    "I deserve this",
+    "I deserve worse",
+    "I'm sorry for being here",
+    "I'm sorry for my mistakes",
+    "I'm sorry",
+    "Sorry",
+    "Sorry",
+    "So sorry",
+    "This is my fault",
+    "It hurts",
+    "This is the punishment I deserve",
+    "This is my punishment",
+    "This is right",
+    "I can't apologize enough",
+    "Keep going",
+    "Don't forgive me",
+    "I hate myself",
+    "I'm a bad person",
+    "More",
+    "Don't stop",
+    "███ █████",
+    "<�dQ<�d[<[d",
+    "���������",
+    "Hurt me",
 ];
 
 const hurtArray2 = [
-	"All respite is repaid in suffering... ",
-    "Every day I live I accumulate suffering in a counter that ticks up without any upper limit... ",
-    "Happiness only hurts me in the long run... ",
-    "Happiness is meant for other people... ",
-    "I deserve worse than nothing... ",
-    "I don't deserve happiness... ",
-    "I hate myself... ",
-    "Redeem me for my sins... ",
-    "I must suffer before I am allowed to die... ",
-    "I only hurt people... ",
-    "I'm a waste of space... ",
-    "I shouldn't be alive... ",
-    "I'm so sorry... ",
-    "I'm sorry for making you hurt me... ",
-    "I'm subhuman... ",
-    "Kill me... ",
-    "Nothing I do will ever compensate for my mistakes... ",
-    "Send me to Hell... ",
-    "Suffering is the only way to salvation... ",
-    "Suffering is redemption... ",
-    "345676543458532436856546536 ",
-    "0000101010111010101010 ",
-    "dgergfdshgtruioIHOUGVYUOGUUfdgaergesr ",
-    "45h6tyfddty6575rb6r "
+	"All respite is repaid in suffering",
+    "Every day I accumulate suffering with no upper limit",
+    "Happiness only hurts me in the long run",
+    "Happiness is for other people",
+    "I deserve worse than nothing",
+    "I don't deserve happiness",
+    "Redeem me for my sins",
+    "I must suffer before I am allowed to die",
+    "I only hurt people",
+    "I'm a waste of space",
+    "I shouldn't be alive",
+    "I'm so sorry",
+    "I'm sorry",
+    "I'm sorry",
+    "I'm subhuman",
+    "Kill me",
+    "Nothing I do will ever compensate for my mistakes",
+    "Suffering is the only path to salvation",
+    "Suffering is redemption",
+    "I'm so stupid",
+    "I'm useless",
+    "I'm worthless",
+    "I should be dead",
+    "I don't deserve to live",
+    "It's all my fault",
+    "I don't deserve oxygen",
+    "I don't deserve food",
+    "I only hurt people",
+    "I'm objectively worthless",
+    "I only make things worse",
+    "Suffering is morally pure",
+    "You can't hate me enough",
+    "Hurt me more",
+    "No one loves me",
+    "No one should ever love me",
+    "No one should ever forgive me",
+    "My life is a mistake",
+    "I only make mistakes",
+    "I'm defective",
+    "Everything is wrong with me",
+    "I can't do anything right",
+    "Life isn't for me",
+    "Everyone hates me",
+    "I should die alone",
+    "I'm hideous",
+    "All my fault",
+    "I've done something unforgivable",
+    "0000101010111010101010",
+    "???Aa�?s????�?A??a���?A ???A?",
+    "dgergfdshgtruioIHOUGVYUOGUUfdgaergesr",
+    "45h6tyfddty6575rb6r",
+    "� �� {۩�� � �� >e�� � �� ��۩",
 ];
 
-let dialogueCount = 0;
-let countLimit = 4;
-const dialogueManager = function() {
-    if (State.variables.score > 1000 && countLimit === 4) {
-    	countLimit = 3;
-        addDialogueInterval();
-    }
-    else if (State.variables.score > 10000 && countLimit === 3) {
-    	countLimit = 2;
-        addDialogueInterval();
-    }
-    else if (State.variables.score > 100000 && countLimit === 2) {
-    	countLimit = 1;
-        addDialogueInterval();
-        addDialogueInterval();
-    }
+const stopArray = [
+    "Why did you stop?",
+    "Keep hurting me"
+];
 
-	if (dialogueCount < 4) {
-    	dialogueCount++;
+let dialogueClickThreshold = 0; /* tracks number of clicks for next dialogue to show */
+let dialogueLimit = 10; /* max number of dialogues at once */
+let dialogueCount = 0; /* number of dialogues currently existing */
+const dialogueManager = function() {
+	if (dialogueClickThreshold < 9) {
+        if (State.variables.score > 1) {
+            dialogueClickThreshold++;
+        }
+        if (State.variables.score > 5000) {
+            dialogueClickThreshold++;
+        }
+        if (State.variables.score > 10000) {
+            dialogueClickThreshold++;
+        }
+        if (State.variables.score > 50000) {
+            dialogueClickThreshold++;
+        }
+        if (State.variables.score > 100000) {
+            dialogueClickThreshold++;
+        }
     }
     else {
-    	dialogueCount = 0;
+    	dialogueClickThreshold = 0;
         hurtDialogue();
     }
 };
 
-const addDialogueInterval = function() {
-	  setInterval( () => {
-      	if (trueTypewriter !== null) {
-        	trueTypewriter.typeString(either(pickHurtArray())).start();
-        }
-    }, 500);
-};
-
 const pickHurtArray = function() {
-	const randNum = Math.random() * (State.variables.score / 1000);
+	const randNum = Math.random() * (State.variables.score / 100000);
     if (randNum < 1) {
     	return hurtArray1;
     }
     return hurtArray2;
 };
 
-const stopArray = [
-    "Why did you stop?",
-    "Keep hurting me..."
-];
+const addDialogue = function() {
+    if (dialogueCount < dialogueLimit && trueTypewriter !== null) {
+        document.querySelector("div.girlA.dialogue").classList.remove("hidden");
+
+        let dialogueString = either(pickHurtArray());
+
+        dialogueString = dialogueString += "... ";
+
+        if (State.variables.score > 1000000000) {
+            dialogueString = dialogueString.toUpperCase();
+        }
+
+        trueTypewriter.typeString(dialogueString).start();
+        dialogueCount++;
+
+        /* not sure how to run callback when typewriter is done
+        (if that's even possible) so wait an arbitrary time before
+        decreasing count */
+        setTimeout(() => { dialogueCount--; }, 500);
+    }
+};
 
 let trueTypewriter = null;
 
 const hurtDialogue = function() {
 	const dialogueTextElement = document.getElementById("dialogueText");
     
-    (((Can't use getElementById at top-level because of how Twine script tag works
+    /* (((Can't use getElementById at top-level because of how Twine script tag works
     It tries to get the element before it loads, or something, same reason 
     setTimeout doesn't work at top level
-    So, just look for it in the actual function)))
+    So, just look for it in the actual function))) */
     
     if (trueTypewriter === null) {
     	trueTypewriter = new Typewriter(dialogueTextElement, {
@@ -465,8 +519,6 @@ const hurtDialogue = function() {
         pauseFor: 1
     	});
     }
-    
-    const newDialogue = either(pickHurtArray());
     
     if (State.variables.score > 1000 && trueTypewriter.options.delay === 30) {
     	trueTypewriter.changeDelay(20);
@@ -478,9 +530,8 @@ const hurtDialogue = function() {
     	trueTypewriter.changeDelay(1);
     }
     
-    trueTypewriter.typeString(newDialogue).start();
+    addDialogue();
 };
-*/
 
 /*
 Randomly determine effect of stab
@@ -596,8 +647,7 @@ const pickDecoName = function() {
 };
 
 const spawnDeco = function() {
-    console.log(decoCount);
-    if (decoCount < 100) {
+    if (decoCount < 50) {
         decoCount++;
         const decoName = pickDecoName();
 

@@ -47,7 +47,6 @@ EVISCERATETHISGIRL.COM
 <<cacheaudio "neutral5" "assets/neutral5.mp3">>
 <<cacheaudio "neutral6" "assets/neutral6.mp3">>
 <<cacheaudio "neutral7" "assets/neutral7.mp3">>
-<<cacheaudio "neutral8" "assets/neutral8.mp3">>
 
 /* --- INCLUDES --- */
 /* For dialogue. */
@@ -73,7 +72,7 @@ Game by <a class="underline" href="https://kadw.neocities.org" target="_blank" r
 :: About {"position":"225,700","size":"100,100"}
 Short game made for the <a class="underline" href="https://itch.io/jam/neo-twiny-jam" target="_blank" rel="noopener noreferrer">2023 Neo Twiny Jam</a>, with a word limit of 500 words or less. Two endings. Up to ten minutes long.
 
-<<replacelink>>Click to show content warnings.<<becomes>>Horror imagery, gore, mental distress, general edginess...<</replacelink>>
+<<replacelink>>Click to show content warnings.<<becomes>>Horror imagery, gore, extreme mental distress, general edginess...<</replacelink>>
 
 - Contains flashing images and audio. Mute the tab to turn off audio.
 - Don't refresh the game while you're playing. It might break things.
@@ -93,5 +92,9 @@ All music by me, except the music that plays when the girl is speaking. That son
 Typing effect for dialogue from <a class="underline" href="https://safi.me.uk/typewriterjs/" target="_blank" rel="noopener noreferrer">TypewriterJS by Tameem Safi</a>.
 
 HTML5 timer code from <a class="underline" href="https://codepen.io/kaolay/pen/LRVxKd" target="_blank" rel="noopener noreferrer">Giuseppe Canale on Codepen</a>.
+
+Inspiration:
+<a class="underline" href="https://store.steampowered.com/app/1451940/NEEDY_STREAMER_OVERLOAD/" target="_blank" rel="">NEEDY STREAMER OVERLOAD</a>
+<a class="underline" href="https://alienmelon.itch.io/everything-is-going-to-be-ok" target="_blank" rel="">EVERYTHING IS GOING TO BE OK</a>
 
 [[Main Menu]]
