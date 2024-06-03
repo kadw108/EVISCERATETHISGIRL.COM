@@ -242,4 +242,6 @@ setup.advanceDialogue();
 
 <<include "ScreenScript">>
 
+<<audio "neutral" loop play>>
+
 <</nobr>>\

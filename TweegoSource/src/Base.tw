@@ -40,6 +40,7 @@ EVISCERATETHISGIRL.COM
 <<cacheaudio "victory" "assets/eviscerate_victory.mp3">>
 <<cacheaudio "violence" "assets/violence_final.mp3">>
 <<cacheaudio "violence_bg" "assets/violence_bg.mp3">>
+<<cacheaudio "neutral" "assets/glitchOST_Wintry_Place.mp3">>
 
 /* --- INCLUDES --- */
 /* For dialogue. */
@@ -76,7 +77,7 @@ Most visuals created by me. All of them are public domain. You can do whatever y
 
 <a class="underline" href="https://processing.org/">Processing</a> and <a class="underline" href="https://photomosh.com/">Photomosh</a> helped with visual effects. Extra Processing methods from https://github.com/anartisticengineer/Glitch-FX-Processing-Version/blob/master/Glitch_FX/Filters.pde.
 
-All music by me, and also public domain. Other public domain sound effects from freesound.org.
+All music by me, except the music that plays when the girl is speaking. That song is <a href="https://www.youtube.com/watch?v=ry33RY0MVGs">Wintry Place</a> by Daniel Simmons, from the now-dead <a href="https://www.glitchthegame.com/">Glitch MMO</a>. All music is public domain. Other public domain sound effects from freesound.org.
 
 Typing effect for dialogue from https://safi.me.uk/typewriterjs/, by Tameem Safi.
 
