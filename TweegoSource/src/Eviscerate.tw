@@ -487,6 +487,8 @@ const hurtDialogue = function() {
 Randomly determine effect of stab
 */
 
+let decoCount = 0;
+
 const randomEffect = function() {
 	const randomNum = Math.random() * 100;
     
@@ -595,38 +597,43 @@ const pickDecoName = function() {
 };
 
 const spawnDeco = function() {
-	const decoName = pickDecoName();
+    console.log(decoCount);
+    if (decoCount < 100) {
+        decoCount++;
+        const decoName = pickDecoName();
 
-    const screenContents = document.getElementById("screenContents");
+        const screenContents = document.getElementById("screenContents");
 
-	const leftValue = Math.round(Math.random () *
-    	(screenContents.offsetWidth - 250)) + 65;
-    const topValue = Math.round(Math.random() *
-    	(screenContents.offsetHeight - 500)) + 225;
+        const leftValue = Math.round(Math.random () *
+            (screenContents.offsetWidth - 250)) + 65;
+        const topValue = Math.round(Math.random() *
+            (screenContents.offsetHeight - 500)) + 225;
 
-	const newDeco = document.createElement("img");
-    newDeco.src = "assets/" + decoName;
-    newDeco.style.top = topValue + "px";
-    newDeco.style.left = leftValue + "px";
-    newDeco.width = Math.min(
-    	Math.random() * 20 - 10 + newDeco.width,
-        120);
-    newDeco.style.transform = "rotate(" + (Math.random() * 360) + "deg)";
-    newDeco.classList.add("deco");
-    newDeco.sizeDecrease = Math.random() * 3 + 1;
+        const newDeco = document.createElement("img");
+        newDeco.src = "assets/" + decoName;
+        newDeco.style.top = topValue + "px";
+        newDeco.style.left = leftValue + "px";
+        newDeco.width = Math.min(
+            Math.random() * 20 - 10 + newDeco.width,
+            120);
+        newDeco.style.transform = "rotate(" + (Math.random() * 360) + "deg)";
+        newDeco.classList.add("deco");
+        newDeco.sizeDecrease = Math.random() * 3 + 1;
 
-    screenContents.appendChild(newDeco);
+        screenContents.appendChild(newDeco);
 
-    const intervalID = setInterval( () => {
-      if (newDeco.width - newDeco.sizeDecrease < 0) {
-      	  newDeco.remove();
+        const intervalID = setInterval( () => {
+        if (newDeco.width - newDeco.sizeDecrease < 0) {
+            decoCount--;
+            newDeco.remove();
             clearInterval(intervalID);
-    	}
-      else {
-          newDeco.width -= newDeco.sizeDecrease;
-      }
-    }, 100);
-    setup.intervalIDs.add(intervalID);
+        }
+        else {
+            newDeco.width -= newDeco.sizeDecrease;
+        }
+        }, 100);
+        setup.intervalIDs.add(intervalID);
+    }
 };
 
 /* For the timer
@@ -658,7 +665,7 @@ const interval = setInterval( () => {
 <</script>>
 <</done>>
 
-<<audio "neutral" stop>>
+<<audio ":all" stop>>
 
 <<switch $helloVisited>>
     <<case 1>>
