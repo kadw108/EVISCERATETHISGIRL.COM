@@ -40,7 +40,14 @@ EVISCERATETHISGIRL.COM
 <<cacheaudio "victory" "assets/eviscerate_victory.mp3">>
 <<cacheaudio "violence" "assets/violence_final.mp3">>
 <<cacheaudio "violence_bg" "assets/violence_bg.mp3">>
-<<cacheaudio "neutral" "assets/glitchOST_Wintry_Place.mp3">>
+<<cacheaudio "neutral1" "assets/neutral1.mp3">>
+<<cacheaudio "neutral2" "assets/neutral2.mp3">>
+<<cacheaudio "neutral3" "assets/neutral3.mp3">>
+<<cacheaudio "neutral4" "assets/neutral4.mp3">>
+<<cacheaudio "neutral5" "assets/neutral5.mp3">>
+<<cacheaudio "neutral6" "assets/neutral6.mp3">>
+<<cacheaudio "neutral7" "assets/neutral7.mp3">>
+<<cacheaudio "neutral8" "assets/neutral8.mp3">>
 
 /* --- INCLUDES --- */
 /* For dialogue. */
@@ -57,12 +64,14 @@ EVISCERATETHISGIRL.COM
 
 <img src="assets/heart_glitch.gif">
 
+Game by <a class="underline" href="https://kadw.neocities.org" target="_blank" rel="noopener noreferrer">KADW</a>
+
 [[Play|Intro]]
 [[About]]
 [[Credits]]
 
 :: About {"position":"225,700","size":"100,100"}
-Short game made for the Neo Twiny Jam, with a word limit of 500 words or less. Two endings. Up to ten minutes long.
+Short game made for the <a class="underline" href="https://itch.io/jam/neo-twiny-jam" target="_blank" rel="noopener noreferrer">2023 Neo Twiny Jam</a>, with a word limit of 500 words or less. Two endings. Up to ten minutes long.
 
 <<replacelink>>Click to show content warnings.<<becomes>>Horror imagery, gore, mental distress, general edginess...<</replacelink>>
 
@@ -73,14 +82,16 @@ Short game made for the Neo Twiny Jam, with a word limit of 500 words or less. T
 [[Main Menu]]
 
 :: Credits {"position":"25,675","size":"100,100"}
-Most visuals created by me. All of them are public domain. You can do whatever you want with them.
+Made with <a class="underline" href="https://twinery.org/" target="_blank" rel="noopener noreferrer">Twine</a> (Sugarcube 2.36.1 in Tweego).
 
-<a class="underline" href="https://processing.org/">Processing</a> and <a class="underline" href="https://photomosh.com/">Photomosh</a> helped with visual effects. Extra Processing methods from https://github.com/anartisticengineer/Glitch-FX-Processing-Version/blob/master/Glitch_FX/Filters.pde.
+Most visuals created by me (KADW). All of them are public domain. You can do whatever you want with them.
 
-All music by me, except the music that plays when the girl is speaking. That song is <a href="https://www.youtube.com/watch?v=ry33RY0MVGs">Wintry Place</a> by Daniel Simmons, from the now-dead <a href="https://www.glitchthegame.com/">Glitch MMO</a>. All music is public domain. Other public domain sound effects from freesound.org.
+<a class="underline" href="https://processing.org/" target="_blank" rel="noopener noreferrer">Processing</a> and <a class="underline" href="https://photomosh.com/" target="_blank" rel="noopener noreferrer">Photomosh</a> helped with visual effects. Extra Processing methods from https://github.com/anartisticengineer/Glitch-FX-Processing-Version/blob/master/Glitch_FX/Filters.pde.
 
-Typing effect for dialogue from https://safi.me.uk/typewriterjs/, by Tameem Safi.
+All music by me, except the music that plays when the girl is speaking. That song is <a class="underline" href="https://www.youtube.com/watch?v=ry33RY0MVGs" target="_blank" rel="noopener noreferrer">Wintry Place</a> by Daniel Simmons, from the now-dead <a class="underline" href="https://www.glitchthegame.com/" target="_blank" rel="noopener noreferrer">Glitch MMO</a>. All music is public domain. Other public domain sound effects from <a class="underline" href="https://freesound.org/" target="_blank" rel="noopener noreferrer">freesound.org</a>.
 
-HTML5 timer code from https://codepen.io/kaolay/pen/LRVxKd, by Giuseppe Canale.
+Typing effect for dialogue from <a class="underline" href="https://safi.me.uk/typewriterjs/" target="_blank" rel="noopener noreferrer">TypewriterJS by Tameem Safi</a>.
+
+HTML5 timer code from <a class="underline" href="https://codepen.io/kaolay/pen/LRVxKd" target="_blank" rel="noopener noreferrer">Giuseppe Canale on Codepen</a>.
 
 [[Main Menu]]
