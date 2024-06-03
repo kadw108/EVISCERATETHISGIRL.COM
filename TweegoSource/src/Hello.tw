@@ -137,7 +137,9 @@ const showDialogue = function(dialogueArray) {
 
         /* Special strings trigger special events/text */
         if (newDialogue.includes("[TIME]")) {
-            const timeStr = new Date().toLocaleTimeString();
+
+            /* remove seconds from time; from https://stackoverflow.com/a/20430558 */
+            const timeStr = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
 
             /*
             const str1 = timeStr.slice(0, timeStr.indexOf(":", 3));
@@ -252,17 +254,17 @@ setup.advanceDialogue();
     <<case 1>>
         <<audio "neutral1" loop play>>
     <<case 2>>
-        <<audio "neutral2" loop volume 0 fadein>>
+        <<timed 1s>><<audio "neutral2" loop volume 0 fadein>><</timed>>
     <<case 3>>
-        <<audio "neutral3" loop volume 0 fadein>>
+        <<timed 1s>><<audio "neutral3" loop volume 0 fadein>><</timed>>
     <<case 4>>
-        <<audio "neutral4" loop volume 0 fadein>>
+        <<timed 1s>><<audio "neutral4" loop volume 0 fadein>><</timed>>
     <<case 5>>
-        <<audio "neutral5" loop volume 0 fadein>>
+        <<timed 1s>><<audio "neutral5" loop volume 0 fadein>><</timed>>
     <<case 6>>
-        <<audio "neutral6" loop volume 0 fadein>>
+        <<timed 1s>><<audio "neutral6" loop volume 0 fadein>><</timed>>
     <<case 7>>
-        <<audio "neutral7" loop volume 0 fadein>>
+        <<timed 1s>> <<audio "neutral7" loop volume 0 fadein>><</timed>>
     <<case 8>>
     <<default>>
 <</switch>>

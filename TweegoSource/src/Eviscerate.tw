@@ -110,7 +110,7 @@ class="fullscreengif hidden" style="z-index: 9; top:50px"/>
     direction: rtl;
     white-space: nowrap;
     
-    z-index: 3;
+    z-index: 5;
 ">
 <span style="direction: ltr; display: inline-block;" id="dialogueText">
 /* From https://stackoverflow.com/a/39874526 */
@@ -361,14 +361,11 @@ const hurtArray1 = [
     "I deserve this",
     "I deserve worse",
     "I'm sorry for being here",
-    "I'm sorry for my mistakes",
     "I'm sorry",
-    "Sorry",
-    "Sorry",
-    "So sorry",
+    "I'm sorry",
+    "I'm so sorry",
     "This is my fault",
     "It hurts",
-    "This is the punishment I deserve",
     "This is my punishment",
     "This is right",
     "I can't apologize enough",
@@ -378,41 +375,40 @@ const hurtArray1 = [
     "I'm a bad person",
     "More",
     "Don't stop",
-    "███ █████",
-    "<�dQ<�d[<[d",
-    "���������",
     "Hurt me",
+    "I only hurt people",
+    "I'm a waste of space",
+    "I'm hideous",
+    "I'm useless",
+    "I'm worthless",
+    "I'm defective",
+    "Suffering is redemption",
+    "Happiness only hurts me in the long run",
+    "I don't deserve oxygen",
+    "I only hurt people",
 ];
 
 const hurtArray2 = [
 	"All respite is repaid in suffering",
     "Every day I accumulate suffering with no upper limit",
-    "Happiness only hurts me in the long run",
     "Happiness is for other people",
     "I deserve worse than nothing",
     "I don't deserve happiness",
     "Redeem me for my sins",
     "I must suffer before I am allowed to die",
-    "I only hurt people",
-    "I'm a waste of space",
-    "I shouldn't be alive",
     "I'm so sorry",
     "I'm sorry",
+    "I shouldn't be alive",
     "I'm sorry",
     "I'm subhuman",
     "Kill me",
     "Nothing I do will ever compensate for my mistakes",
     "Suffering is the only path to salvation",
-    "Suffering is redemption",
     "I'm so stupid",
-    "I'm useless",
-    "I'm worthless",
     "I should be dead",
+    "I don't deserve food",
     "I don't deserve to live",
     "It's all my fault",
-    "I don't deserve oxygen",
-    "I don't deserve food",
-    "I only hurt people",
     "I'm objectively worthless",
     "I only make things worse",
     "Suffering is morally pure",
@@ -423,13 +419,11 @@ const hurtArray2 = [
     "No one should ever forgive me",
     "My life is a mistake",
     "I only make mistakes",
-    "I'm defective",
     "Everything is wrong with me",
     "I can't do anything right",
     "Life isn't for me",
     "Everyone hates me",
     "I should die alone",
-    "I'm hideous",
     "All my fault",
     "I've done something unforgivable",
     "0000101010111010101010",
@@ -437,7 +431,27 @@ const hurtArray2 = [
     "dgergfdshgtruioIHOUGVYUOGUUfdgaergesr",
     "45h6tyfddty6575rb6r",
     "� �� {۩�� � �� >e�� � �� ��۩",
+    "���������",
+    "███ █████",
+    "<�dQ<�d[<[d",
 ];
+
+const hurtArray3 = [
+    "0000101010111010101010",
+    "???Aa�?s????�?A??a���?A ???A?",
+    "dgergfdshgtruioIHOUGVYUOGUUfdgaergesr",
+    "nomoqewkrllap",
+    "45h6tyfddty6575rb6r",
+    "� �� {۩�� � �� >e�� � �� ��۩",
+    "����A�A�AAAA���",
+    "███ █████",
+    "█████████████████",
+    "████ ██ ███ █████ █ ██",
+    "<�dQ<�d[<[d",
+    "101010101010101",
+    "0010010101010101",
+    "00001010101",
+]
 
 const stopArray = [
     "Why did you stop?",
@@ -445,24 +459,28 @@ const stopArray = [
 ];
 
 let dialogueClickThreshold = 0; /* tracks number of clicks for next dialogue to show */
-let dialogueLimit = 10; /* max number of dialogues at once */
+let dialogueLimit = 7; /* max number of dialogues at once */
 let dialogueCount = 0; /* number of dialogues currently existing */
 const dialogueManager = function() {
-	if (dialogueClickThreshold < 9) {
-        if (State.variables.score > 1) {
-            dialogueClickThreshold++;
-        }
-        if (State.variables.score > 5000) {
+	if (dialogueClickThreshold < 8) {
+        if (State.variables.score > 1000) {
             dialogueClickThreshold++;
         }
         if (State.variables.score > 10000) {
             dialogueClickThreshold++;
         }
-        if (State.variables.score > 50000) {
+        if (State.variables.score > 20000) {
             dialogueClickThreshold++;
         }
         if (State.variables.score > 100000) {
             dialogueClickThreshold++;
+        }
+        if (State.variables.score > 500000) {
+            dialogueClickThreshold++;
+        }
+        if (State.variables.score > 1000000) {
+            dialogueClickThreshold++;
+            hurtDialogue();
         }
     }
     else {
@@ -472,7 +490,11 @@ const dialogueManager = function() {
 };
 
 const pickHurtArray = function() {
-	const randNum = Math.random() * (State.variables.score / 100000);
+    if (State.variables.score > 800000) {
+        return hurtArray3;
+    }
+
+	const randNum = Math.random() * (State.variables.score / 60000);
     if (randNum < 1) {
     	return hurtArray1;
     }
@@ -487,7 +509,7 @@ const addDialogue = function() {
 
         dialogueString = dialogueString += "... ";
 
-        if (State.variables.score > 1000000000) {
+        if (State.variables.score > 20000) {
             dialogueString = dialogueString.toUpperCase();
         }
 
@@ -497,7 +519,7 @@ const addDialogue = function() {
         /* not sure how to run callback when typewriter is done
         (if that's even possible) so wait an arbitrary time before
         decreasing count */
-        setTimeout(() => { dialogueCount--; }, 500);
+        setTimeout(() => { dialogueCount--; }, 50);
     }
 };
 
