@@ -138,10 +138,14 @@ const showDialogue = function(dialogueArray) {
         /* Special strings trigger special events/text */
         if (newDialogue.includes("[TIME]")) {
             const timeStr = new Date().toLocaleTimeString();
+
+            /*
             const str1 = timeStr.slice(0, timeStr.indexOf(":", 3));
             const str2 = timeStr.slice(-3);
 
             newDialogue = newDialogue.replace("[TIME]", str1 + str2);
+            */
+            newDialogue = newDialogue.replace("[TIME]", timeStr);
         }
         if (newDialogue.includes("[TIME2]")) {
             let timeText = "";
@@ -242,6 +246,26 @@ setup.advanceDialogue();
 
 <<include "ScreenScript">>
 
-<<audio "neutral" loop play>>
+<<done>>
+<<switch $helloVisited>>
+    <<case 1>>
+        <<audio "neutral1" loop play>>
+    <<case 2>>
+        <<audio "neutral2" volume 0.9 loop play>>
+    <<case 3>>
+        <<audio "neutral3" volume 0.9 loop play>>
+    <<case 4>>
+        <<audio "neutral4" volume 0.9 loop play>>
+    <<case 5>>
+        <<audio "neutral5" volume 0.9 loop play>>
+    <<case 6>>
+        <<audio "neutral6" volume 0.9 loop play>>
+    <<case 7>>
+        <<audio "neutral7" volume 0.9 loop play>>
+    <<case 8>>
+        <<audio "neutral8" volume 0.9 loop play>>
+    <<default>>
+<</switch>>
+<</done>>
 
 <</nobr>>\
