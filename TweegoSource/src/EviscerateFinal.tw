@@ -64,7 +64,7 @@ class="fullscreengif noOpacity" style="
 </div>
 '>>
 <<audio "violence" play>>
-<<audio "violence_bg" loop play>>
+<<audio "violence_bg" play>>
 <<run setup.clickButton()>>
 <</link>>
 
