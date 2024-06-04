@@ -105,9 +105,50 @@ const dialogue9 = [
     "",
 ];
 
+const spare1 = [
+    "...",
+    "Nothing?",
+    "What was my mistake?",
+    "Maybe I didn't scream enough...",
+    "Maybe I didn't bleed enough...",
+    "I tried so hard.",
+    "But I wasn't good enough for you."
+];
+
+const spare2 = [
+    "...",
+    "Did I do something wrong?",
+    "I have one purpose.",
+    "Am I not good enough even for that?",
+    "I was made for this, and you're refusing to hurt me...",
+    "You have to do more.",
+    "It's my only reason to exist.",
+];
+
+const spare3 = [
+    "...",
+    "Am I so disgusting that you can't bear to even touch me?",
+    "That you can't stand to interact with me at all?",
+    "I matter so little to you that I don't even deserve pain...",
+    "I don't deserve anything...",
+    "...",
+    "If you don't care about me at all, then maybe I should just...",
+    "Go away...",
+];
+
+const spare4 = [
+    "...",
+    "I can't do this anymore...",
+    "I'm sorry."
+];
+
 setup.dialogueArrayList = [
 	dialogue1, dialogue2, dialogue3, dialogue4, dialogue5, 
     dialogue6, dialogue7, dialogue8, dialogue9
+];
+
+setup.spareArrayList = [
+    spare1, spare2, spare3, spare4
 ];
 
 State.variables.whichDialogue = 0;
