@@ -18,7 +18,19 @@
 ">
 </p>
 
-<<if $stabCycles < 9>>
+<<if $spareCycles >= 4>>
+<a id="transition" data-passage="SpareFinal" class="hidden">
+<p class="dialogue" style="
+	font-family: 'Public Pixel', monospace;
+    color: #ff0099;
+    font-size: 28px;
+    text-align: center;
+    top: 200px;
+    z-index: 25;
+">
+YES
+</p></a>
+<<elseif $stabCycles < 9>>
 <a id="transition" data-passage="Eviscerate" class="hidden">
 <p class="dialogue" style="
 	font-family: 'Public Pixel', monospace;
@@ -63,9 +75,18 @@ let typewriter2 = new Typewriter(dialogueTextElement, {
 });
 
 /* Last element of current dialogue array */
-const displayText =
-    setup.dialogueArrayList[State.variables.whichDialogue]
-    .slice(-1)[0];
+let displayText = "";
+console.log(State.variables.stabbedLastCycle);
+if (State.variables.stabbedLastCycle) {
+    displayText =
+        setup.dialogueArrayList[State.variables.whichDialogue]
+        .slice(-1)[0];
+}
+else {
+    displayText =
+        setup.spareArrayList[State.variables.whichDialogue]
+        .slice(-1)[0];   
+}
 
 typewriter2
     .typeString(displayText)

@@ -714,6 +714,10 @@ From https://codepen.io/kaolay/pen/LRVxKd
 const timeArray = [70, 60, 40, 30, 25, 21, 21, 20];
 let time = timeArray[State.variables.stabCycles - 1]; /* seconds */
 
+if (State.variables.stabCycles === 1) {
+    time = timeArray[State.variables.allCycles - 1];
+}
+
 let i = 0;
 let finalOffset = 94; /* the length of strokedasharray ( pixel circumference of the circle -> css ) */
 let step = finalOffset/time;
@@ -741,7 +745,16 @@ const interval = setInterval( () => {
 <<switch $stabCycles>>
     <<case 1>>
         <<audio "eviscerate1" volume 0.5 fadeoverto 20 1>>
-        <<timed 71s>><<goto "Blackscreen">><</timed>> /* 71 */
+
+        <<if $allCycles === 1>>
+            <<timed 71s>><<audio ":all" stop>><<goto "Blackscreen">><</timed>> /* 71 */
+        <<elseif $allCycles === 2>>
+            <<timed 60s>><<audio ":all" stop>><<goto "Blackscreen">><</timed>> /* 60 */
+        <<elseif $allCycles === 3>>
+            <<timed 40s>><<audio ":all" stop>><<goto "Blackscreen">><</timed>> /* 40 */
+        <<elseif $allCycles === 4>>
+            <<timed 30s>><<audio ":all" stop>><<goto "Blackscreen">><</timed>> /* 30 */
+        <</if>>
     <<case 2>>
         <<audio "eviscerate2" volume 0.6 fadeoverto 10 1>>
         <<timed 60s>><<goto "Blackscreen">><</timed>> /* 60 */

@@ -79,6 +79,14 @@ Her
 
 </div>
 
+<<if $allCycles !== 0>>
+    <<if $score === 0>>
+        <<set $stabbedLastCycle to false>>
+    <<else>>
+        <<set $stabbedLastCycle to true>>
+    <</if>>
+<</if>>
+
 <<done>>
 <<script>>
 
@@ -94,23 +102,45 @@ if (State.variables.stabCycles === setup.dialogueArrayList.length) {
     link1.parentNode.style.backgroundColor = "#ff0000";
 }
 
-State.variables.stabCycles++;
+State.variables.allCycles++;
+if (State.variables.stabbedLastCycle || State.variables.allCycles === 1) {
+    State.variables.stabCycles++;
+}
+else {
+    State.variables.spareCycles++;
+}
 
 let dialogueNum = 0;
 
 setup.advanceDialogue = function() {
-    if (State.variables.stabCycles > 0) {
-        if (State.variables.stabCycles <= setup.dialogueArrayList.length - 1) {
-            State.variables.whichDialogue = State.variables.stabCycles - 1;
+    if (State.variables.stabbedLastCycle || State.variables.allCycles === 1) {
+        if (State.variables.stabCycles > 0) {
+            if (State.variables.stabCycles <= setup.dialogueArrayList.length - 1) {
+                State.variables.whichDialogue = State.variables.stabCycles - 1;
+            }
+            else {
+                State.variables.whichDialogue = setup.dialogueArrayList.length - 1;
+            }
         }
-        else {
-            State.variables.whichDialogue = setup.dialogueArrayList.length - 1;
-        }
-    }
 
-	const dialogueArray =
-        setup.dialogueArrayList[State.variables.whichDialogue];
-	showDialogue(dialogueArray);
+        const dialogueArray =
+            setup.dialogueArrayList[State.variables.whichDialogue];
+        showDialogue(dialogueArray);
+    }
+    else {
+         if (State.variables.spareCycles > 0) {
+            if (State.variables.spareCycles <= setup.spareArrayList.length - 1) {
+                State.variables.whichDialogue = State.variables.spareCycles - 1;
+            }
+            else {
+                State.variables.whichDialogue = setup.spareArrayList.length - 1;
+            }
+        }
+
+        const dialogueArray =
+            setup.spareArrayList[State.variables.whichDialogue];
+        showDialogue(dialogueArray);
+    }
 };
 
 const showDialogue = function(dialogueArray) {
@@ -250,24 +280,28 @@ setup.advanceDialogue();
 <<include "ScreenScript">>
 
 <<done>>
-<<switch $stabCycles>>
-    <<case 1>>
-        <<audio "neutral1" loop play>>
-    <<case 2>>
-        <<timed 1s>><<audio "neutral2" loop volume 0 fadein>><</timed>>
-    <<case 3>>
-        <<timed 1s>><<audio "neutral3" loop volume 0 fadein>><</timed>>
-    <<case 4>>
-        <<timed 1s>><<audio "neutral4" loop volume 0 fadein>><</timed>>
-    <<case 5>>
-        <<timed 1s>><<audio "neutral5" loop volume 0 fadein>><</timed>>
-    <<case 6>>
-        <<timed 1s>><<audio "neutral6" loop volume 0 fadein>><</timed>>
-    <<case 7>>
-        <<timed 1s>> <<audio "neutral7" loop volume 0 fadein>><</timed>>
-    <<case 8>>
-    <<default>>
-<</switch>>
+<<if $stabCycles === 1 && $allCycles > 1>>
+    <<timed 1s>><<audio "neutral2" loop volume 0 fadein>><</timed>>
+<<else>>
+    <<switch $stabCycles>>
+        <<case 1>>
+            <<timed 1s>><<audio "neutral1" loop volume 0 fadein>><</timed>>
+        <<case 2>>
+            <<timed 1s>><<audio "neutral2" loop volume 0 fadein>><</timed>>
+        <<case 3>>
+            <<timed 1s>><<audio "neutral3" loop volume 0 fadein>><</timed>>
+        <<case 4>>
+            <<timed 1s>><<audio "neutral4" loop volume 0 fadein>><</timed>>
+        <<case 5>>
+            <<timed 1s>><<audio "neutral5" loop volume 0 fadein>><</timed>>
+        <<case 6>>
+            <<timed 1s>><<audio "neutral6" loop volume 0 fadein>><</timed>>
+        <<case 7>>
+            <<timed 1s>> <<audio "neutral7" loop volume 0 fadein>><</timed>>
+        <<case 8>>
+        <<default>>
+    <</switch>>
+<</if>>
 <</done>>
 
 <</nobr>>\

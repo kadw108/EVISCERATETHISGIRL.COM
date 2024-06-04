@@ -1,0 +1,31 @@
+:: SpareFinal
+\<<nobr>>
+<div id="screen">
+<div id="screenBg"/>
+<div id="edge" style="
+	background-image: url(assets/edge_black.gif),
+        url(assets/rainbow_screen.gif);
+">
+<div id="screenContents">
+
+<<include "IncludeHeaderElements">>
+
+<img src="assets/edge_black.gif" class="fullscreengif"/>
+
+<div id="score" style="
+	top: 405px;
+    font-size: 50px;
+    color: #ff0000;
+    text-shadow:
+    	3px 3px 0px #000,
+        -3px -3px 0px #000,
+        5px 5px 0px #000,
+        -5px -5px 0px #000,
+        8px 8px 6px #000;
+"><p>
+0
+</p></div>
+
+</div></div></div>
+
+<</nobr>>
