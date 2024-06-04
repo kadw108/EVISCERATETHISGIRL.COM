@@ -80,7 +80,7 @@ Her
 </div>
 
 <<if $allCycles !== 0>>
-    <<if $score === 0>>
+    <<if $score === 0 && $stabCycles < 7>>
         <<set $stabbedLastCycle to false>>
     <<else>>
         <<set $stabbedLastCycle to true>>
@@ -105,9 +105,11 @@ if (State.variables.stabCycles === setup.dialogueArrayList.length) {
 State.variables.allCycles++;
 if (State.variables.stabbedLastCycle || State.variables.allCycles === 1) {
     State.variables.stabCycles++;
+    State.variables.consecutiveSpares = 0;
 }
 else {
     State.variables.spareCycles++;
+    State.variables.consecutiveSpares++;
 }
 
 let dialogueNum = 0;

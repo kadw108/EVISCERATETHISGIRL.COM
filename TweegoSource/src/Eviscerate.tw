@@ -109,6 +109,8 @@ class="fullscreengif hidden" style="z-index: 9; top:50px"/>
     max-width: 90%;
     direction: rtl;
     white-space: nowrap;
+
+    font-size: 80%;
     
     z-index: 5;
 ">
@@ -363,28 +365,23 @@ const hurtArray1 = [
     "I'm sorry for being here",
     "I'm sorry",
     "I'm sorry",
+    "I'm sorry",
     "I'm so sorry",
     "This is my fault",
     "It hurts",
     "This is my punishment",
     "This is right",
-    "I can't apologize enough",
     "Keep going",
     "Don't forgive me",
     "I hate myself",
     "I'm a bad person",
-    "More",
     "Don't stop",
     "Hurt me",
     "I only hurt people",
-    "I'm a waste of space",
     "I'm hideous",
     "I'm useless",
     "I'm worthless",
     "I'm defective",
-    "Suffering is redemption",
-    "Happiness only hurts me in the long run",
-    "I don't deserve oxygen",
     "I only hurt people",
 ];
 
@@ -392,11 +389,16 @@ const hurtArray2 = [
 	"All respite is repaid in suffering",
     "Every day I accumulate suffering with no upper limit",
     "Happiness is for other people",
+    "Happiness only hurts me in the long run",
     "I deserve worse than nothing",
     "I don't deserve happiness",
+    "I can't apologize enough",
     "Redeem me for my sins",
     "I must suffer before I am allowed to die",
+    "I don't deserve oxygen",
+    "I'm a waste of space",
     "I'm so sorry",
+    "Suffering is redemption",
     "I'm sorry",
     "I shouldn't be alive",
     "I'm sorry",
@@ -712,15 +714,19 @@ From https://codepen.io/kaolay/pen/LRVxKd
 */
 
 const timeArray = [70, 60, 40, 30, 25, 21, 21, 20];
-let time = timeArray[State.variables.stabCycles - 1]; /* seconds */
+State.temporary.time = timeArray[State.variables.stabCycles - 1]; /* seconds */
 
-if (State.variables.stabCycles === 1) {
-    time = timeArray[State.variables.allCycles - 1];
+if (State.variables.consecutiveSpares > 0) {
+    let index = State.variables.stabCycles + State.variables.consecutiveSpares - 1;
+    index = Math.min(index, timeArray.length - 1);
+    State.temporary.time = timeArray[index];
+    State.temporary.time  = Math.max(State.temporary.time - State.variables.consecutiveSpares * 10, 10);
 }
+State.temporary.time2 = State.temporary.time + "s";
 
 let i = 0;
 let finalOffset = 94; /* the length of strokedasharray ( pixel circumference of the circle -> css ) */
-let step = finalOffset/time;
+let step = finalOffset/State.temporary.time;
 /* let timeCaption = document.querySelector( 'h2' ); */
 let circle = document.querySelector( '.circle_animation' ).style;
 
@@ -729,7 +735,7 @@ circle.strokeDashoffset = 0;
 
 const interval = setInterval( () => {
 	/* timeCaption.innerText = time - i; */
-	if ( i++ == time ) {
+	if ( i++ === State.temporary.time ) {
 		clearInterval( interval );
     } else {
 		circle.strokeDashoffset = step * i;
@@ -742,42 +748,28 @@ const interval = setInterval( () => {
 
 <<audio ":all" stop>>
 
+<<done>>
 <<switch $stabCycles>>
     <<case 1>>
         <<audio "eviscerate1" volume 0.5 fadeoverto 20 1>>
-
-        <<if $allCycles === 1>>
-            <<timed 71s>><<audio ":all" stop>><<goto "Blackscreen">><</timed>> /* 71 */
-        <<elseif $allCycles === 2>>
-            <<timed 60s>><<audio ":all" stop>><<goto "Blackscreen">><</timed>> /* 60 */
-        <<elseif $allCycles === 3>>
-            <<timed 40s>><<audio ":all" stop>><<goto "Blackscreen">><</timed>> /* 40 */
-        <<elseif $allCycles === 4>>
-            <<timed 30s>><<audio ":all" stop>><<goto "Blackscreen">><</timed>> /* 30 */
-        <</if>>
     <<case 2>>
         <<audio "eviscerate2" volume 0.6 fadeoverto 10 1>>
-        <<timed 60s>><<goto "Blackscreen">><</timed>> /* 60 */
     <<case 3>>
         <<audio "eviscerate3" volume 0.7 fadeoverto 5 1>>
-        <<timed 40s>><<goto "Blackscreen">><</timed>> /* 40 */
     <<case 4>>
         <<audio "eviscerate4" volume 0.8 fadeoverto 2 1>>
-        <<timed 30s>><<goto "Blackscreen">><</timed>> /* 30 */
     <<case 5>>
         <<audio "eviscerate5" volume 0.9 fadeoverto 1 1>>
-        <<timed 26s>><<goto "Blackscreen">><</timed>> /* 25 */
     <<case 6>>
         <<audio "eviscerate6" play>>
-        <<timed 21s>><<goto "Blackscreen">><</timed>> /* 21 */
     <<case 7>>
         <<audio "eviscerate7" play>>
-        <<timed 21s>><<goto "Blackscreen">><</timed>> /* 21 */
     <<case 8>>
         <<audio "eviscerate8" play>>
-        <<timed 20s>><<goto "Blackscreen">><</timed>> /* 20 */
     <<default>>
 <</switch>>
+<<timed `_time2`>><<audio ":all" stop>><<goto "Blackscreen">><</timed>> /* 20 */
+<</done>>
 
 <<include "ScreenScript">>
 

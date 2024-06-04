@@ -18,7 +18,7 @@ const dialogue1 = [
 
 const dialogue2 = [
     "...",
-    "Still here...?",
+    "Here we are again...",
     "...",
     "What's the worst thing you've ever done...?",
     "Imagine I'm the one who did it.",
@@ -33,7 +33,6 @@ const dialogue2 = [
 
 const dialogue3 = [
 	"...",
-    "Not satisfied yet?",
     "Here's some life advice...",
     "I think you need a healthy dose of self-hatred to motivate yourself to live.",
     "Because to live is to suffer...",
@@ -108,9 +107,9 @@ const dialogue9 = [
 const spare1 = [
     "...",
     "Did I do something wrong?",
+    "I was made to suffer...",
     "I have one purpose.",
-    "Am I not good enough even for that?",
-    "I was made for this...",
+    "Am I not good enough even for that...?",
     "You have to hurt me.",
     "It's my only reason to exist.",
 ];
@@ -123,26 +122,26 @@ const spare2 = [
     "Maybe I didn't bleed enough...",
     "I tried so hard.",
     "...",
-    "But I wasn't good enough for you..."
+    "But...",
+    "I wasn't good enough for you."
 ];
 
 const spare3 = [
     "...",
-    "Am I so disgusting that you can't bear to even touch me?",
-    "That you can't stand to interact with me at all?",
+    "Am I so disgusting that you can't bear to interact with me in any way?",
     "You think I don't deserve your attention...",
     "...",
     "But it's true... I deserve nothing.",
-    "What difference does it make to you what happens to me?",
+    "What difference does it make what happens to me?",
     "You don't care about me at all...",
-    "You shouldn't...",
+    "You shouldn't.",
 ];
 
 const spare4 = [
     "...",
     "I can't do this anymore...",
     "I'm sorry...",
-    "I really mean nothing to you...",
+    "I really mean nothing.",
 ];
 
 setup.dialogueArrayList = [

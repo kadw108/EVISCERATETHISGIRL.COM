@@ -399,16 +399,7 @@ setTimeout(() => {
 <</script>>
 <</done>>
 
-<<audio "eviscerate1" stop>>
-<<audio "eviscerate2" stop>>
-<<audio "eviscerate3" stop>>
-<<audio "eviscerate4" stop>>
-<<audio "eviscerate5" stop>>
-<<audio "eviscerate6" stop>>
-<<audio "eviscerate7" stop>>
-<<audio "eviscerate8" stop>>
-
-<<audio "victory" stop>>
+<<audio ":all" stop>>
 
 <</nobr>>\
 

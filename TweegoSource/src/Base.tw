@@ -27,6 +27,7 @@ EVISCERATETHISGIRL.COM
 
 <<set $stabCycles to 0>>
 <<set $spareCycles to 0>>
+<<set $consecutiveSpares to 0>>
 <<set $allCycles to 0>>
 <<set $stabbedLastCycle to true>>
 
