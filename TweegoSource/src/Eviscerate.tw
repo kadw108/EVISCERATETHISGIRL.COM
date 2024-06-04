@@ -49,22 +49,22 @@ class="fullscreengif hidden" style="z-index: 9; top:50px"/>
 
 <img src="assets/edge_black.gif" class="fullscreengif"/>
 
-<<if $helloVisited < 9>>
-    <<if $helloVisited < 7>>
+<<if $stabCycles < 9>>
+    <<if $stabCycles < 7>>
     <img src="assets/girl.gif" class="fullscreengif"/>
     <</if>>
 
-    <<if $helloVisited >= 8>>
+    <<if $stabCycles >= 8>>
     <img src="assets/girl8.gif" class="fullscreengif"/>
-    <<elseif $helloVisited >= 7>>
+    <<elseif $stabCycles >= 7>>
     <img src="assets/girl7.gif" class="fullscreengif" style="
         top: 80px;
     "/>
-    <<elseif $helloVisited >= 6>>
+    <<elseif $stabCycles >= 6>>
     <img src="assets/girl6.gif" class="fullscreengif"/>
-    <<elseif $helloVisited >= 5>>
+    <<elseif $stabCycles >= 5>>
     <img src="assets/girl5.gif" class="fullscreengif"/>
-    <<elseif $helloVisited >= 4>>
+    <<elseif $stabCycles >= 4>>
     <img src="assets/girl4.gif" class="fullscreengif"/>
     <</if>>
 <</if>>
@@ -147,7 +147,7 @@ State.variables.score = 0;
 
 const increaseScore = function() {
     State.variables.score++;
-    if (State.variables.helloVisited <= 1) {
+    if (State.variables.stabCycles <= 1) {
         if (State.variables.score > 75) {
             State.variables.score++;
         }
@@ -155,7 +155,7 @@ const increaseScore = function() {
             State.variables.score += Math.round(State.variables.score/200);
         }
     }
-    else if (State.variables.helloVisited <= 2) {
+    else if (State.variables.stabCycles <= 2) {
         State.variables.score += 2;
         if (State.variables.score > 75) {
             State.variables.score++;
@@ -164,7 +164,7 @@ const increaseScore = function() {
             State.variables.score += Math.round(State.variables.score/100);
         }
     }
-    else if (State.variables.helloVisited <= 3) {
+    else if (State.variables.stabCycles <= 3) {
         State.variables.score += 3;
 
         if (State.variables.score > 20) {
@@ -180,7 +180,7 @@ const increaseScore = function() {
             State.variables.score += Math.round(State.variables.score/500);
         }
     }
-    else if (State.variables.helloVisited <= 4) {
+    else if (State.variables.stabCycles <= 4) {
         State.variables.score += 3;
 
         if (State.variables.score > 10) {
@@ -199,7 +199,7 @@ const increaseScore = function() {
             State.variables.score += Math.round(State.variables.score/1000);
         }
     }
-    else if (State.variables.helloVisited <= 5) {
+    else if (State.variables.stabCycles <= 5) {
         State.variables.score += 4;
 
         if (State.variables.score > 10) {
@@ -218,7 +218,7 @@ const increaseScore = function() {
             State.variables.score += Math.round(State.variables.score/1000);
         }
     }
-    else if (State.variables.helloVisited <= 6) {
+    else if (State.variables.stabCycles <= 6) {
         State.variables.score += 5;
 
         if (State.variables.score > 5) {
@@ -237,7 +237,7 @@ const increaseScore = function() {
             State.variables.score += Math.round(State.variables.score/1000);
         }
     }
-    else if (State.variables.helloVisited <= 7) {
+    else if (State.variables.stabCycles <= 7) {
         State.variables.score += 5;
 
         if (State.variables.score > 5) {
@@ -256,7 +256,7 @@ const increaseScore = function() {
             State.variables.score += Math.round(State.variables.score/500);
         }
     }
-    else if (State.variables.helloVisited <= 8) {
+    else if (State.variables.stabCycles <= 8) {
         State.variables.score += 6;
 
         if (State.variables.score > 5) {
@@ -451,7 +451,7 @@ const hurtArray3 = [
     "101010101010101",
     "0010010101010101",
     "00001010101",
-]
+];
 
 const stopArray = [
     "Why did you stop?",
@@ -712,7 +712,7 @@ From https://codepen.io/kaolay/pen/LRVxKd
 */
 
 const timeArray = [70, 60, 40, 30, 25, 21, 21, 20];
-let time = timeArray[State.variables.helloVisited - 1]; /* seconds */
+let time = timeArray[State.variables.stabCycles - 1]; /* seconds */
 
 let i = 0;
 let finalOffset = 94; /* the length of strokedasharray ( pixel circumference of the circle -> css ) */
@@ -738,7 +738,7 @@ const interval = setInterval( () => {
 
 <<audio ":all" stop>>
 
-<<switch $helloVisited>>
+<<switch $stabCycles>>
     <<case 1>>
         <<audio "eviscerate1" volume 0.5 fadeoverto 20 1>>
         <<timed 71s>><<goto "Blackscreen">><</timed>> /* 71 */

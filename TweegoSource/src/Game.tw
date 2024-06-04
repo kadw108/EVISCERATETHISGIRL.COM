@@ -57,19 +57,19 @@ const clickRefresh = () => {
 };
 document.getElementById("refreshButton").onclick = clickRefresh;
 
-if (State.variables.helloVisited > 1) {
+if (State.variables.stabCycles > 1) {
     document.getElementById("glitch0").classList.remove("noOpacity");
 }
-if (State.variables.helloVisited > 2) {
+if (State.variables.stabCycles > 2) {
     document.getElementById("glitch1").classList.remove("noOpacity");
 }
-if (State.variables.helloVisited > 3) {
+if (State.variables.stabCycles > 3) {
     document.getElementById("glitch2").classList.remove("noOpacity");
 }
-if (State.variables.helloVisited > 4) {
+if (State.variables.stabCycles > 4) {
     document.getElementById("glitch3").classList.remove("noOpacity");
 }
-if (State.variables.helloVisited > 5) {
+if (State.variables.stabCycles > 5) {
     document.getElementById("glitch4").classList.remove("noOpacity");
 }
 
@@ -85,7 +85,7 @@ if (State.variables.helloVisited > 5) {
 <<script>>
 
 const screen = document.getElementById("screenBg");
-switch (State.variables.helloVisited) {
+switch (State.variables.stabCycles) {
     case 0:
         screen.style.opacity = 1;
     case 1:

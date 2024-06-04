@@ -10,22 +10,22 @@
 
 <<include "IncludeHeaderElements">>
 
-<<if $helloVisited <= 9>>
-    <<if $helloVisited < 7>>
+<<if $stabCycles <= 9>>
+    <<if $stabCycles < 7>>
     <img src="assets/girl.gif" class="fullscreengif"/>
     <</if>>
 
-    <<if $helloVisited === 8>>
+    <<if $stabCycles === 8>>
     <img src="assets/girl8.gif" class="fullscreengif"/>
-    <<elseif $helloVisited >= 7>>
+    <<elseif $stabCycles >= 7>>
     <img src="assets/girl7.gif" class="fullscreengif" style="
         top: 80px;
     "/>
-    <<elseif $helloVisited >= 6>>
+    <<elseif $stabCycles >= 6>>
     <img src="assets/girl6.gif" class="fullscreengif"/>
-    <<elseif $helloVisited >= 5>>
+    <<elseif $stabCycles >= 5>>
     <img src="assets/girl5.gif" class="fullscreengif"/>
-    <<elseif $helloVisited >= 4>>
+    <<elseif $stabCycles >= 4>>
     <img src="assets/girl4.gif" class="fullscreengif"/>
     <</if>>
 <</if>>
@@ -83,7 +83,7 @@ Her
 <<script>>
 
 /* Special styling for last dialogue block */
-if (State.variables.helloVisited === setup.dialogueArrayList.length) {
+if (State.variables.stabCycles === setup.dialogueArrayList.length) {
     const dialogueTextContainer = document.getElementById("dialogueTextContainer");
     dialogueTextContainer.classList.remove("girlA");
     dialogueTextContainer.classList.remove("dialogueA");
@@ -94,14 +94,14 @@ if (State.variables.helloVisited === setup.dialogueArrayList.length) {
     link1.parentNode.style.backgroundColor = "#ff0000";
 }
 
-State.variables.helloVisited++;
+State.variables.stabCycles++;
 
 let dialogueNum = 0;
 
 setup.advanceDialogue = function() {
-    if (State.variables.helloVisited > 0) {
-        if (State.variables.helloVisited <= setup.dialogueArrayList.length - 1) {
-            State.variables.whichDialogue = State.variables.helloVisited - 1;
+    if (State.variables.stabCycles > 0) {
+        if (State.variables.stabCycles <= setup.dialogueArrayList.length - 1) {
+            State.variables.whichDialogue = State.variables.stabCycles - 1;
         }
         else {
             State.variables.whichDialogue = setup.dialogueArrayList.length - 1;
@@ -250,7 +250,7 @@ setup.advanceDialogue();
 <<include "ScreenScript">>
 
 <<done>>
-<<switch $helloVisited>>
+<<switch $stabCycles>>
     <<case 1>>
         <<audio "neutral1" loop play>>
     <<case 2>>

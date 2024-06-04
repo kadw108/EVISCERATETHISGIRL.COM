@@ -18,7 +18,7 @@
 ">
 </p>
 
-<<if $helloVisited < 9>>
+<<if $stabCycles < 9>>
 <a id="transition" data-passage="Eviscerate" class="hidden">
 <p class="dialogue" style="
 	font-family: 'Public Pixel', monospace;

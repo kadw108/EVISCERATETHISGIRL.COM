@@ -24,7 +24,7 @@ EVISCERATETHISGIRL.COM
 /* --- VARIABLES --- */
 <<set $score to 0>>
 <<set $sin to "">>
-<<set $helloVisited to 0>>
+<<set $stabCycles to 0>>
 <<set setup.scoreList to []>>
 <<set setup.intervalIDs to new Set()>>
 
