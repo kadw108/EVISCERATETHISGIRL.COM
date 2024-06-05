@@ -18,7 +18,7 @@
 ">
 </p>
 
-<<if $spareCycles >= 4>>
+<<if $spareCycles >= 3>>
 <a id="transition" data-passage="SpareFinal" class="hidden">
 <p class="dialogue" style="
 	font-family: 'Public Pixel', monospace;

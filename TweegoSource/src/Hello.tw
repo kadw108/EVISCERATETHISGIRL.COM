@@ -282,24 +282,25 @@ setup.advanceDialogue();
 <<include "ScreenScript">>
 
 <<done>>
+<<audio ":all" stop>>
 <<if $stabCycles === 1 && $allCycles > 1>>
-    <<timed 1s>><<audio "neutral2" loop volume 0 fadein>><</timed>>
+    <<audio "neutral2" loop play>>
 <<else>>
     <<switch $stabCycles>>
         <<case 1>>
-            <<timed 1s>><<audio "neutral1" loop volume 0 fadein>><</timed>>
+           <<audio "neutral1" loop play>>
         <<case 2>>
-            <<timed 1s>><<audio "neutral2" loop volume 0 fadein>><</timed>>
+            <<audio "neutral2" loop play>>
         <<case 3>>
-            <<timed 1s>><<audio "neutral3" loop volume 0 fadein>><</timed>>
+            <<audio "neutral3" loop play>>
         <<case 4>>
-            <<timed 1s>><<audio "neutral4" loop volume 0 fadein>><</timed>>
+            <<audio "neutral4" loop play>>
         <<case 5>>
-            <<timed 1s>><<audio "neutral5" loop volume 0 fadein>><</timed>>
+            <<audio "neutral5" loop play>>
         <<case 6>>
-            <<timed 1s>><<audio "neutral6" loop volume 0 fadein>><</timed>>
+            <<audio "neutral6" loop play>>
         <<case 7>>
-            <<timed 1s>> <<audio "neutral7" loop volume 0 fadein>><</timed>>
+            <<audio "neutral7" loop play>>
         <<case 8>>
         <<default>>
     <</switch>>

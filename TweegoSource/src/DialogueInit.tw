@@ -77,14 +77,11 @@ const dialogue6 = [
 
 const dialogue7 = [
     "...",
-    "...But, do you feel better now?",
-    "It never works...",
+    "...Do you feel better now?",
+    "I don't think it works...",
     "You know, other people are accomplishing things with their lives...",
     "...While you're on a site called EVISCERATETHISGIRL.COM...",
-    "What does that say about you?",
-    "You'll spend the rest of your life like this...",
-    "Watching it drain away into nothing...",
-    "Killing yourself slowly...",
+    "I wonder what that says about you...",
     "...",
 ];
 
@@ -116,32 +113,27 @@ const spare1 = [
 
 const spare2 = [
     "...",
-    "...Nothing?",
+    "...Nothing, again?",
     "What was my mistake?",
     "Maybe I didn't scream enough...",
     "Maybe I didn't bleed enough...",
     "I tried so hard.",
     "...",
-    "But...",
-    "I wasn't good enough for you."
+    "Or...",
+    "Am I now so disgusting and horrible that you can't bear to interact with me at all?",
+    "..."
 ];
 
 const spare3 = [
     "...",
-    "Am I so disgusting that you can't bear to interact with me in any way?",
-    "You think I don't deserve your attention...",
+    "I see...",
+    "You think I'm not worthy of being touched in any way...",
+    "I don't deserve your attention...",
+    "I deserve nothing.",
     "...",
-    "But it's true... I deserve nothing.",
+    "It's true.",
     "What difference does it make what happens to me?",
-    "You don't care about me at all...",
-    "You shouldn't.",
-];
-
-const spare4 = [
-    "...",
-    "I can't do this anymore...",
-    "I'm sorry...",
-    "I really mean nothing.",
+    "I should just disappear.",
 ];
 
 setup.dialogueArrayList = [
@@ -150,7 +142,7 @@ setup.dialogueArrayList = [
 ];
 
 setup.spareArrayList = [
-    spare1, spare2, spare3, spare4
+    spare1, spare2, spare3
 ];
 
 State.variables.whichDialogue = 0;

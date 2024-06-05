@@ -720,7 +720,7 @@ if (State.variables.consecutiveSpares > 0) {
     let index = State.variables.stabCycles + State.variables.consecutiveSpares - 1;
     index = Math.min(index, timeArray.length - 1);
     State.temporary.time = timeArray[index];
-    State.temporary.time  = Math.max(State.temporary.time - State.variables.consecutiveSpares * 10, 10);
+    State.temporary.time  = Math.max(State.temporary.time - State.variables.consecutiveSpares * 20, 10);
 }
 State.temporary.time2 = State.temporary.time + "s";
 
@@ -768,7 +768,7 @@ const interval = setInterval( () => {
         <<audio "eviscerate8" play>>
     <<default>>
 <</switch>>
-<<timed `_time2`>><<audio ":all" stop>><<goto "Blackscreen">><</timed>> /* 20 */
+<<timed `_time2`>><<audio ":all" stop>><<if $score === 0>><<goto "Hello">><<else>><<goto "Blackscreen">><</if>><</timed>> /* 20 */
 <</done>>
 
 <<include "ScreenScript">>
