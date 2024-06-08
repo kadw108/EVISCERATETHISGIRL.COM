@@ -143,8 +143,8 @@ const spare3 = [
 
 setup.returnDialogue = [
     ["...Like that... yes..."], /* skipped bc off by 1 */
-    ["...That's right...", "This is how it needs to go."],
-    ["...", "You did the right thing again...", "I don't understand...", "Please... you have to keep going..."],
+    ["...That's right...", "This is how it needs to go.", "..."],
+    ["...", "You did the right thing again...", "I don't understand...", "Remember... you have to keep going...", "..."],
     ["...I think you've learned to do the correct thing now..."], /* also skipped */
 ];
 
