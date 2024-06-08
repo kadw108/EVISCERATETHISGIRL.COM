@@ -132,7 +132,6 @@ setup.advanceDialogue = function() {
             setup.dialogueArrayList[State.variables.whichDialogue];
 
         const newLines = setup.returnDialogue[State.variables.spareCycles];
-        console.log(dialogueArray, State.variables.breakSpareStreak, State.variables.stabCycles, State.variables.spareCycles, newLines);
 
         if (State.variables.breakSpareStreak) {
             if (newLines !== null) { /* null newLines after we're done so it doesn't get added repeatedly */
