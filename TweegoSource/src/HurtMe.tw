@@ -76,7 +76,6 @@ let typewriter2 = new Typewriter(dialogueTextElement, {
 
 /* Last element of current dialogue array */
 let displayText = "";
-console.log(State.variables.stabbedLastCycle);
 if (State.variables.stabbedLastCycle) {
     displayText =
         setup.dialogueArrayList[State.variables.whichDialogue]

@@ -30,6 +30,7 @@ EVISCERATETHISGIRL.COM
 <<set $consecutiveSpares to 0>>
 <<set $allCycles to 0>>
 <<set $stabbedLastCycle to true>>
+<<set $breakSpareStreak to false>>
 
 <<set setup.scoreList to []>>
 <<set setup.intervalIDs to new Set()>>
@@ -69,7 +70,7 @@ EVISCERATETHISGIRL.COM
 
 <img src="assets/heart_glitch.gif">
 
-Game by <a class="underline" href="https://kadw.neocities.org" target="_blank" rel="noopener noreferrer">KADW</a> <small>(v2.0.0)</small>
+Game by <a class="underline" href="https://kadw.neocities.org" target="_blank" rel="noopener noreferrer">KADW</a> <small>(v2.1.0)</small>
 
 [[Play|Intro]]
 [[About]]

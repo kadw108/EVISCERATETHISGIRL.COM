@@ -117,23 +117,32 @@ const spare2 = [
     "What was my mistake?",
     "Maybe I didn't scream enough...",
     "Maybe I didn't bleed enough...",
-    "I tried so hard.",
+    "Maybe I didn't suffer enough...",
     "...",
     "Or...",
-    "Am I now so disgusting and horrible that you can't bear to interact with me at all?",
+    "Am I so intrinsically revolting that you just can't bear to interact with me anymore?",
     "..."
 ];
 
 const spare3 = [
     "...",
     "I see...",
-    "You think I'm not worthy of being touched in any way...",
-    "I don't deserve your attention...",
-    "I deserve nothing.",
+    "You think I'm not worthy of you...",
+    "You think I don't deserve your attention...",
+    "You think I deserve nothing.",
     "...",
-    "It's true.",
-    "What difference does it make what happens to me?",
+    "It's all true.",
+    "...",
+    "What difference does it make what happens to me, in the end?",
+    "Nothing.",
     "I should just disappear.",
+];
+
+setup.returnDialogue = [
+    ["...Like that... yes..."], /* skipped bc off by 1 */
+    ["...That's right...", "This is how it needs to go."],
+    ["...", "You did the right thing again...", "I don't understand...", "Please... you have to keep going..."],
+    ["...I think you've learned to do the correct thing now..."], /* also skipped */
 ];
 
 setup.dialogueArrayList = [

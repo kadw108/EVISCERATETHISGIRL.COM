@@ -722,7 +722,7 @@ if (State.variables.consecutiveSpares > 0) {
     State.temporary.time = timeArray[index];
     State.temporary.time  = Math.max(State.temporary.time - State.variables.consecutiveSpares * 20, 10);
 }
-State.temporary.time2 = State.temporary.time + "s";
+State.temporary.time2 = (State.temporary.time + 1) + "s";
 
 let i = 0;
 let finalOffset = 94; /* the length of strokedasharray ( pixel circumference of the circle -> css ) */

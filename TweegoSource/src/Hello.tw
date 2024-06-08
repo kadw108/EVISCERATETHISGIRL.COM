@@ -105,6 +105,9 @@ if (State.variables.stabCycles === setup.dialogueArrayList.length) {
 State.variables.allCycles++;
 if (State.variables.stabbedLastCycle || State.variables.allCycles === 1) {
     State.variables.stabCycles++;
+    if (State.variables.consecutiveSpares > 0) {
+        State.variables.breakSpareStreak = true;
+    }
     State.variables.consecutiveSpares = 0;
 }
 else {
@@ -127,6 +130,19 @@ setup.advanceDialogue = function() {
 
         const dialogueArray =
             setup.dialogueArrayList[State.variables.whichDialogue];
+
+        const newLines = setup.returnDialogue[State.variables.spareCycles];
+        console.log(dialogueArray, State.variables.breakSpareStreak, State.variables.stabCycles, State.variables.spareCycles, newLines);
+
+        if (State.variables.breakSpareStreak) {
+            if (newLines !== null) { /* null newLines after we're done so it doesn't get added repeatedly */
+                for (let i = newLines.length - 1; i >= 0; i--) {
+                    dialogueArray.unshift(newLines[i]);
+                }
+                setup.returnDialogue[State.variables.spareCycles] = null;
+            }
+        }
+
         showDialogue(dialogueArray);
     }
     else {
