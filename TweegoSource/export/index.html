@@ -550,6 +550,7 @@ From https://twinery.org/questions/1224/i-want-to-reveal-and-replace-text-within
 &lt;&lt;set $consecutiveSpares to 0&gt;&gt;
 &lt;&lt;set $allCycles to 0&gt;&gt;
 &lt;&lt;set $stabbedLastCycle to true&gt;&gt;
+&lt;&lt;set $breakSpareStreak to false&gt;&gt;
 
 &lt;&lt;set setup.scoreList to []&gt;&gt;
 &lt;&lt;set setup.intervalIDs to new Set()&gt;&gt;
@@ -586,7 +587,7 @@ EVISCERATETHISGIRL.COM
 
 &lt;img src=&quot;assets/heart_glitch.gif&quot;&gt;
 
-Game by &lt;a class=&quot;underline&quot; href=&quot;https://kadw.neocities.org&quot; target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot;&gt;KADW&lt;/a&gt; &lt;small&gt;(v2.0.0)&lt;/small&gt;
+Game by &lt;a class=&quot;underline&quot; href=&quot;https://kadw.neocities.org&quot; target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot;&gt;KADW&lt;/a&gt; &lt;small&gt;(v2.1.0)&lt;/small&gt;
 
 [[Play|Intro]]
 [[About]]
@@ -738,23 +739,32 @@ const spare2 = [
     &quot;What was my mistake?&quot;,
     &quot;Maybe I didn&#39;t scream enough...&quot;,
     &quot;Maybe I didn&#39;t bleed enough...&quot;,
-    &quot;I tried so hard.&quot;,
+    &quot;Maybe I didn&#39;t suffer enough...&quot;,
     &quot;...&quot;,
     &quot;Or...&quot;,
-    &quot;Am I now so disgusting and horrible that you can&#39;t bear to interact with me at all?&quot;,
+    &quot;Am I so intrinsically revolting that you just can&#39;t bear to interact with me anymore?&quot;,
     &quot;...&quot;
 ];
 
 const spare3 = [
     &quot;...&quot;,
     &quot;I see...&quot;,
-    &quot;You think I&#39;m not worthy of being touched in any way...&quot;,
-    &quot;I don&#39;t deserve your attention...&quot;,
-    &quot;I deserve nothing.&quot;,
+    &quot;You think I&#39;m not worthy of you...&quot;,
+    &quot;You think I don&#39;t deserve your attention...&quot;,
+    &quot;You think I deserve nothing.&quot;,
     &quot;...&quot;,
-    &quot;It&#39;s true.&quot;,
-    &quot;What difference does it make what happens to me?&quot;,
+    &quot;It&#39;s all true.&quot;,
+    &quot;...&quot;,
+    &quot;What difference does it make what happens to me, in the end?&quot;,
+    &quot;Nothing.&quot;,
     &quot;I should just disappear.&quot;,
+];
+
+setup.returnDialogue = [
+    [&quot;...Like that... yes...&quot;], /* skipped bc off by 1 */
+    [&quot;...That&#39;s right...&quot;, &quot;This is how it needs to go.&quot;],
+    [&quot;...&quot;, &quot;You did the right thing again...&quot;, &quot;I don&#39;t understand...&quot;, &quot;Please... you have to keep going...&quot;],
+    [&quot;...I think you&#39;ve learned to do the correct thing now...&quot;], /* also skipped */
 ];
 
 setup.dialogueArrayList = [
@@ -1491,7 +1501,7 @@ if (State.variables.consecutiveSpares &gt; 0) {
     State.temporary.time = timeArray[index];
     State.temporary.time  = Math.max(State.temporary.time - State.variables.consecutiveSpares * 20, 10);
 }
-State.temporary.time2 = State.temporary.time + &quot;s&quot;;
+State.temporary.time2 = (State.temporary.time + 1) + &quot;s&quot;;
 
 let i = 0;
 let finalOffset = 94; /* the length of strokedasharray ( pixel circumference of the circle -&gt; css ) */
@@ -2281,6 +2291,9 @@ if (State.variables.stabCycles === setup.dialogueArrayList.length) {
 State.variables.allCycles++;
 if (State.variables.stabbedLastCycle || State.variables.allCycles === 1) {
     State.variables.stabCycles++;
+    if (State.variables.consecutiveSpares &gt; 0) {
+        State.variables.breakSpareStreak = true;
+    }
     State.variables.consecutiveSpares = 0;
 }
 else {
@@ -2303,6 +2316,19 @@ setup.advanceDialogue = function() {
 
         const dialogueArray =
             setup.dialogueArrayList[State.variables.whichDialogue];
+
+        const newLines = setup.returnDialogue[State.variables.spareCycles];
+        console.log(dialogueArray, State.variables.breakSpareStreak, State.variables.stabCycles, State.variables.spareCycles, newLines);
+
+        if (State.variables.breakSpareStreak) {
+            if (newLines !== null) { /* null newLines after we&#39;re done so it doesn&#39;t get added repeatedly */
+                for (let i = newLines.length - 1; i &gt;= 0; i--) {
+                    dialogueArray.unshift(newLines[i]);
+                }
+                setup.returnDialogue[State.variables.spareCycles] = null;
+            }
+        }
+
         showDialogue(dialogueArray);
     }
     else {
@@ -2560,7 +2586,6 @@ let typewriter2 = new Typewriter(dialogueTextElement, {
 
 /* Last element of current dialogue array */
 let displayText = &quot;&quot;;
-console.log(State.variables.stabbedLastCycle);
 if (State.variables.stabbedLastCycle) {
     displayText =
         setup.dialogueArrayList[State.variables.whichDialogue]
