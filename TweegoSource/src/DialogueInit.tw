@@ -77,11 +77,14 @@ const dialogue6 = [
 
 const dialogue7 = [
     "...",
-    "...Do you feel better now?",
-    "I don't think it works...",
+    "...But, do you feel better now?",
+    "It never works...",
     "You know, other people are accomplishing things with their lives...",
     "...While you're on a site called EVISCERATETHISGIRL.COM...",
-    "I wonder what that says about you...",
+    "What does that say about you?",
+    "You'll spend the rest of your life like this...",
+    "Watching it drain away into nothing...",
+    "Killing yourself slowly...",
     "...",
 ];
 

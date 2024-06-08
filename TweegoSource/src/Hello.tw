@@ -80,7 +80,7 @@ Her
 </div>
 
 <<if $allCycles !== 0>>
-    <<if $score === 0 && $stabCycles < 7>>
+    <<if $score === 0 && $stabCycles < 6>>
         <<set $stabbedLastCycle to false>>
     <<else>>
         <<set $stabbedLastCycle to true>>
